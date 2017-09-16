@@ -13,7 +13,6 @@ import {
   Avatar,
   Icon
 } from 'react-native-elements';
-import HeartButton from './HeartButton';
 
 /*-- THE COMPONENT --*/
 const SuperMapControl = (props: SuperMapControlProps) => {
@@ -122,24 +121,8 @@ const SuperMapControl = (props: SuperMapControlProps) => {
       //enter styles here
         container: {
           flex: 1,
-          flexDirection: 'column'
+          flexDirection: 'row'
         },
-        card: {
-          flex: 5,
-          backgroundColor: 'powderblue'
-        },
-        interactors: {
-          flex: 1,
-          flexDirection: 'row',             //align the group top
-          justifyContent: 'center',  //align the group center
-          alignItems: 'center',             //align items to each other center
-          padding: '5%',
-          backgroundColor: 'violet'
-
-        },
-        heartButton: {
-          flex: 1,
-        }
     });
 
 

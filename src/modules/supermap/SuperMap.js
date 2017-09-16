@@ -15,6 +15,7 @@
       List,
       ListItem,
       Icon,
+      Badge,
       FormLabel,
       FormInput,
       Button
@@ -25,6 +26,7 @@
     import { superMapData } from './data'
     import MapView from 'react-native-maps'
     import StationCard from '../../components/StationCard'
+    import CommentCard from '../../components/CommentCard'
 
   //redux
     import { bindActionCreators } from 'redux'
@@ -101,9 +103,78 @@ class SuperMap extends Component {
       //console.log(stopsToDisplay);
       return stopsToDisplay;
     }
-  
+
+    getColor(targetLine,data){
+       for(i=0;i<data.length;i++){
+        if(targetLine == data[i].id){
+          return data[i].bg;
+        }
+        //else i++
+       }
+       //if no match
+       return 'light-gray';
+    }
+
+
   //render()
   render() {
+
+    const lineList = [
+      {
+        id:'A',bg:'blue',text:'white'
+      },
+      {
+        id:'C',bg:'blue',text:'white'
+      },
+      {
+        id:'E',bg:'blue',text:'white'
+      },
+      {
+        id:'B',bg:'orange',text:'white'
+      },
+      {
+        id:'D',bg:'orange',text:'white'
+      },
+      {
+        id:'F',bg:'orange',text:'white'
+      },
+      {
+        id:'M',bg:'orange',text:'white'
+      },
+      {
+        id:'J',bg:'brown',text:'white'
+      },
+      {
+        id:'Z',bg:'brown',text:'white'
+      },
+      {
+        id:'G',bg:'lime',text:'white'
+      },
+      {
+        id:'L',bg:'gray',text:'white'
+      },
+      {
+        id:'1',bg:'red',text:'white'
+      },
+      {
+        id:'2',bg:'red',text:'white'
+      },
+      {
+        id:'3',bg:'red',text:'white'
+      },
+      {
+        id:'4',bg:'green',text:'white'
+      },
+      {
+        id:'5',bg:'green',text:'white'
+      },
+      {
+        id:'6',bg:'green',text:'white'
+      },
+      {
+        id:'7',bg:'purple',text:'white'
+      },
+    ]
 
     //const from the navigator
       //const { id, shortName, longName, area, lines, colors } = this.props.navigation.state.params;
@@ -136,6 +207,7 @@ class SuperMap extends Component {
                 latitude: this.getLat(theStop[1]),
                 longitude: this.getLong(theStop[1])
               }}
+              pinColor={ this.getColor(this.props.selectedLine,lineList) }
             >
               <MapView.Callout
                 tooltip={false}
@@ -163,29 +235,31 @@ class SuperMap extends Component {
           ))
         }
         </MapView>
-        <View>
-          <Button
-            title='A'
-            onPress={() => this.getLineStops('A') }
-          />
-          <Button
-            title='F'
-            onPress={() => this.getLineStops('F') }
-          />
-          <Button
-            title='R'
-            onPress={() => this.getLineStops('R') }
-          />
-          <Button
-            title='2'
-            onPress={() => this.getLineStops('2') }
-          />
-          <Button
-            title='7'
-            onPress={() => this.getLineStops('7') }
-          />
-        </View>
+        <View style={{
+          flexDirection: 'row',
+          flexWrap: 'wrap',
+          marginTop: '10%',
+          marginLeft: '3%',
+          marginRight: '3%',
+          //backgroundColor: 'powderblue',
+        }}>
+        {
+          lineList.map( (line) => (
+              <Badge
+                value= {line.id}
+                containerStyle={{
+                  backgroundColor: this.props.selectedLine == line.id ? line.bg : 'gainsboro'
+                }}
+                textStyle={{
+                  color: line.text
+                }}
+                onPress={() => this.getLineStops(line.id) }
+              />
+            )
+          )
+        }
 
+        </View>
       </View>
     )
   }//end render
