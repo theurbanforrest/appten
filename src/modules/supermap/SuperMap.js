@@ -231,7 +231,6 @@ class SuperMap extends Component {
                 longitude: this.getLong(theStop[1])
               }}
               pinColor={ this.getColor(this.props.selectedLine,lineList) }
-              onPress={()=>this.props.actions.getPreview(theStop[0])}
             >
               <MapView.Callout
                 tooltip={false}
@@ -245,7 +244,7 @@ class SuperMap extends Component {
                     flex: 1,
                     color: 'black'}}
                   >
-                    {theStop[0]}
+                    {theStop[0]} >
                   </Text>
                   <Text style={{
                     flex: 1,
