@@ -54,7 +54,7 @@ export default handleActions(
       //set station_id into previewedStation and return state
         return {
           ...state,
-          previewedStation: '',
+          previewedStation: null,
         }
     },
     [SELECT_LINE]: (state: superMapState, action) => {

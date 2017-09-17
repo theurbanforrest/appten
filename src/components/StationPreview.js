@@ -6,7 +6,8 @@ import {
   Text
 } from 'react-native';
 import {
-  Button
+  Button,
+  Icon
 } from 'react-native-elements';
 
 /*-- THE COMPONENT --*/
@@ -15,7 +16,8 @@ const StationPreview = (props: StationPreviewProps) => {
   //define constants to take in as props
   //e.g. const { all, the, things } = props
     const {
-      title,
+      stationName,
+      lines,
       visible,
       onClearPress
 
@@ -33,15 +35,38 @@ const StationPreview = (props: StationPreviewProps) => {
           width: '100%',
           padding: '3%',
           height: '30%',
-          backgroundColor: 'powderblue'
+          backgroundColor: 'black',
+          color: 'white',
         }}>
-          <Text>
-            {title}
-          </Text>
-          <Button
-          title='Close'
-          onPress={onClearPress}
-        />
+          <View style={{
+            flex: 1,
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+          }}>
+            <View style={{
+              flex: 21,
+            }}>
+              <Text style={{
+                color: 'white',
+                fontSize: 24,
+              }}
+              >
+                {stationName}
+              </Text>
+            </View>
+            <View style={{
+              flex: 3,
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+            }}>
+              <Icon 
+                name='close'
+                color='purple'
+                type='font-awesome'
+                onPress={onClearPress}
+              />
+            </View>
+          </View>
       </View>
     )
   } else return false;
@@ -52,9 +77,10 @@ const StationPreview = (props: StationPreviewProps) => {
     StationPreview.defaultProps = {
       //enter the default values here
 
-        title: 'Howzit braddah',
+        stationName: 'Howzit braddah',
         visible: true,
-        //onClearPress: not setting by default
+        //onClearPress: not setting func by default
+        //lines: not setting array by default
 
     };
 
@@ -63,9 +89,10 @@ const StationPreview = (props: StationPreviewProps) => {
       //define the types here  e.g. string, object, func, any, bool, number
       //oneOfType([array of types])
 
-        title: PropTypes.string,
+        stationName: PropTypes.string,
         visible: PropTypes.bool,
         onClearPress: PropTypes.func,
+        lines: PropTypes.any
 
     };
 
