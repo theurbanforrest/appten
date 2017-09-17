@@ -1,74 +1,46 @@
-/*------ IMPORTS -----*/
 
-  //packages
-    import React, { PropTypes, Component } from 'react'
-    import {
-      View,
-      Text,
-    } from 'react-native'
-    import { 
-      Button
-    } from 'react-native-elements'
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { Button } from 'react-native-elements';
 
-  //components and styles 
-    import { styles } from './styles'
-    import { superMapData } from '../supermap/data'
+class HelloWorld extends Component {
+  constructor(props) {
+    super(props);
 
-  //redux
-    import { bindActionCreators } from 'redux'
-    import { connect } from 'react-redux'
-    //need this for Components instead of pure functions
-      import * as Actions from './actions'
-
-const HelloWorld = props => {
-
-  function hello(){
-    let gps = superMapData[0][11];
-    let myRegex = /^(\bPOINT\b)..([^\s]+)\s([^\s]+)./.exec(gps);
-
-    let long = myRegex[2];
-    let lat = myRegex[3];
-
-    console.log(long);
-    console.log(lat);
+    this.state = {
+      latitude: null,
+      longitude: null,
+      error: null,
+    };
   }
 
-  //this is an example of a pure function, not a component
-  //const { printSelf } = props;
-  //this.state = { text: 'Useless Placeholder' };
+  hello() {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        this.setState({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+          error: null,
+        });
+      },
+      (error) => this.setState({ error: error.message }),
+      { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+    );
+  }
 
-  //Fooling around with react-native-maps MapView
-  return (
-    <View style={{
-      flex: 1,
-      flexDirection: 'column',
-      alignItems: 'center',
-      justifyContent: 'center'
-    }}>
-      <Text>
-        Sup ma baddah?
-      </Text>
-      <Button
-        title='Pretty g, pretty g'
-        onPress={() => console.log('pretty g pretty g')}
-      />
-    </View>
-  )
+  render() {
+    return (
+      <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>Latitude: {this.state.latitude}</Text>
+        <Text>Longitude: {this.state.longitude}</Text>
+        {this.state.error ? <Text>Error: {this.state.error}</Text> : null}
+        <Button
+          title='Get em boo'
+          onPress={() => this.hello() }
+        />
+      </View>
+    );
+  }
 }
 
-/*----- REDUX CONNECT -----*/
-
-  export default connect(
-    //this is mapStateToProps verbosely
-      //Which part of the Redux global state does our component want to receive as props?
-      (state) => {
-        return {
-          //previewedStation: state.supermap.previewedStation
-        }
-      },
-    //this is mapDispatchToProps verbosely
-      //Which action creators does it want to receive by props?
-      (dispatch) => ({
-        //actions: bindActionCreators(Actions, dispatch)
-      }),
-  )(HelloWorld);
+export default HelloWorld;

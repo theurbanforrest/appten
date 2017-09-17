@@ -81,17 +81,25 @@ class SuperMap extends Component {
 
       for(i=0;i<superMapData.length;i++){
 
+        //if targetLine matches the line
         if(superMapData[i][12].indexOf(targetLine) > -1){
 
-          stopsToDisplay.push(
-            [
-              superMapData[i][10],
-              superMapData[i][11],
-              superMapData[i][12]
-            ]
-            
-          );
+          //if targetLine is E and superMapData contains 'express'
+          let x = /Express/.exec(superMapData[i][12]);
 
+          if(targetLine=='E' && x ){
+            //do nothing
+          }
+          else{
+            //add to the array
+            stopsToDisplay.push(
+              [
+                superMapData[i][10],
+                superMapData[i][11],
+                superMapData[i][12]
+              ]
+            );
+          }
         }
         //else i++
       }
@@ -152,6 +160,18 @@ class SuperMap extends Component {
       },
       {
         id:'L',bg:'gray',text:'white'
+      },
+      {
+        id:'N',bg:'goldenrod',text:'black'
+      },
+      {
+        id:'Q',bg:'goldenrod',text:'black'
+      },
+      {
+        id:'R',bg:'goldenrod',text:'black'
+      },
+      {
+        id:'W',bg:'goldenrod',text:'black'
       },
       {
         id:'1',bg:'red',text:'white'
@@ -251,7 +271,7 @@ class SuperMap extends Component {
                   backgroundColor: this.props.selectedLine == line.id ? line.bg : 'gainsboro'
                 }}
                 textStyle={{
-                  color: line.text
+                  color: this.props.selectedLine == line.id ? line.text : 'white'
                 }}
                 onPress={() => this.getLineStops(line.id) }
               />
