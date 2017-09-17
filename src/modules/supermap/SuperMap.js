@@ -25,8 +25,7 @@
     import { styles } from './styles'
     import { superMapData } from './data'
     import MapView from 'react-native-maps'
-    import StationCard from '../../components/StationCard'
-    import CommentCard from '../../components/CommentCard'
+    import StationPreview from '../../components/StationPreview'
 
   //redux
     import { bindActionCreators } from 'redux'
@@ -58,15 +57,12 @@ class SuperMap extends Component {
       return Number(myRegex[2]);
     }
 
-    displayOrNot(myStr,targetLine){
+    clearStationPreview(){
+      //send to redux
+      this.props.actions.clearPreview();
 
-      let myRegex = targetLine.exec(myStr)
-      if(!myRegex){
-        return false;
-      }
-      else {
-        return true;
-      }
+      //close callout
+
     }
 
     getLineStops(targetLine){
@@ -104,8 +100,9 @@ class SuperMap extends Component {
         //else i++
       }
 
-      //return to redux
+      //return to redux, also clear any preview
       this.props.actions.selectLine(targetLine, stopsToDisplay);
+      this.props.actions.clearPreview();
 
       //return the array
       //console.log(stopsToDisplay);
@@ -124,6 +121,12 @@ class SuperMap extends Component {
     }
 
 
+  componentWillMount() {
+    
+    //set A line as the default
+    this.getLineStops('A');
+  }
+
   //render()
   render() {
 
@@ -138,16 +141,16 @@ class SuperMap extends Component {
         id:'E',bg:'blue',text:'white'
       },
       {
-        id:'B',bg:'orange',text:'white'
+        id:'B',bg:'darkorange',text:'white'
       },
       {
-        id:'D',bg:'orange',text:'white'
+        id:'D',bg:'darkorange',text:'white'
       },
       {
-        id:'F',bg:'orange',text:'white'
+        id:'F',bg:'darkorange',text:'white'
       },
       {
-        id:'M',bg:'orange',text:'white'
+        id:'M',bg:'darkorange',text:'white'
       },
       {
         id:'J',bg:'brown',text:'white'
@@ -156,7 +159,7 @@ class SuperMap extends Component {
         id:'Z',bg:'brown',text:'white'
       },
       {
-        id:'G',bg:'lime',text:'white'
+        id:'G',bg:'yellowgreen',text:'white'
       },
       {
         id:'L',bg:'gray',text:'white'
@@ -228,9 +231,11 @@ class SuperMap extends Component {
                 longitude: this.getLong(theStop[1])
               }}
               pinColor={ this.getColor(this.props.selectedLine,lineList) }
+              onPress={()=>this.props.actions.getPreview(theStop[0])}
             >
               <MapView.Callout
                 tooltip={false}
+                onPress={()=>this.props.actions.getPreview(theStop[0])}
               >
                 <View style={{
                   flex: 1,
@@ -256,29 +261,40 @@ class SuperMap extends Component {
         }
         </MapView>
         <View style={{
-          flexDirection: 'row',
-          flexWrap: 'wrap',
-          marginTop: '10%',
-          marginLeft: '3%',
-          marginRight: '3%',
-          //backgroundColor: 'powderblue',
+          //flex: 1,
+          flexDirection: 'column',
+          justifyContent: 'space-around'
         }}>
-        {
-          lineList.map( (line) => (
-              <Badge
-                value= {line.id}
-                containerStyle={{
-                  backgroundColor: this.props.selectedLine == line.id ? line.bg : 'gainsboro'
-                }}
-                textStyle={{
-                  color: this.props.selectedLine == line.id ? line.text : 'white'
-                }}
-                onPress={() => this.getLineStops(line.id) }
-              />
-            )
-          )
-        }
-
+          <StationPreview
+            visible={this.props.previewedStation ? true : false}
+            title={'This is the title'}
+            onClearPress={()=>this.clearStationPreview()}
+          />
+          <View style={{
+            //flex: 1,
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            marginTop: '10%',
+            marginLeft: '3%',
+            marginRight: '3%',
+            //backgroundColor: 'powderblue',
+          }}>
+            {
+              lineList.map( (line) => (
+                  <Badge
+                    value= {line.id}
+                    containerStyle={{
+                      backgroundColor: this.props.selectedLine == line.id ? line.bg : 'gainsboro'
+                    }}
+                    textStyle={{
+                      color: this.props.selectedLine == line.id ? line.text : 'white'
+                    }}
+                    onPress={() => this.getLineStops(line.id) }
+                  />
+                )
+              )
+            }
+          </View>
         </View>
       </View>
     )

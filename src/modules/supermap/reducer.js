@@ -1,7 +1,7 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
-import { GET_PREVIEW, SELECT_LINE } from './constants'
+import { GET_PREVIEW, SELECT_LINE, CLEAR_PREVIEW } from './constants'
 
 
 
@@ -46,6 +46,17 @@ export default handleActions(
         }
     },
     //add other reducers here
+    [CLEAR_PREVIEW]: (state: superMapState, action) => {
+      //get info from action and state
+        //const {} = action;
+        const { previewedStation } = state;
+
+      //set station_id into previewedStation and return state
+        return {
+          ...state,
+          previewedStation: '',
+        }
+    },
     [SELECT_LINE]: (state: superMapState, action) => {
       //get info from action and state
         const { payload: {selected_line,selected_stops} } = action;

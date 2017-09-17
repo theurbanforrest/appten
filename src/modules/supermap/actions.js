@@ -1,6 +1,6 @@
 // @flow
 
-import { GET_PREVIEW, SELECT_LINE } from './constants'
+import { GET_PREVIEW, CLEAR_PREVIEW, SELECT_LINE } from './constants'
 
 export type Action = {
   type: string,
@@ -30,6 +30,14 @@ export const getPreview = (station_id: string): Action => {
     }
   }
 }
+
+export const clearPreview = (): Action => {
+  return {
+    type: CLEAR_PREVIEW
+  }
+}
+
+
 
 export const selectLine = (selected_line: string, selected_stops: any): Action => {
   return {
