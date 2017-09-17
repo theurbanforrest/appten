@@ -23,7 +23,7 @@
 
   //components and styles 
     import { styles } from './styles'
-    import { superMapData } from './data'
+    import { superMapData, lineList } from './data'
     import MapView from 'react-native-maps'
     import StationPreview from '../../components/StationPreview'
 
@@ -130,74 +130,7 @@ class SuperMap extends Component {
   //render()
   render() {
 
-    const lineList = [
-      {
-        id:'A',bg:'blue',text:'white'
-      },
-      {
-        id:'C',bg:'blue',text:'white'
-      },
-      {
-        id:'E',bg:'blue',text:'white'
-      },
-      {
-        id:'B',bg:'darkorange',text:'white'
-      },
-      {
-        id:'D',bg:'darkorange',text:'white'
-      },
-      {
-        id:'F',bg:'darkorange',text:'white'
-      },
-      {
-        id:'M',bg:'darkorange',text:'white'
-      },
-      {
-        id:'J',bg:'brown',text:'white'
-      },
-      {
-        id:'Z',bg:'brown',text:'white'
-      },
-      {
-        id:'G',bg:'yellowgreen',text:'white'
-      },
-      {
-        id:'L',bg:'gray',text:'white'
-      },
-      {
-        id:'N',bg:'goldenrod',text:'black'
-      },
-      {
-        id:'Q',bg:'goldenrod',text:'black'
-      },
-      {
-        id:'R',bg:'goldenrod',text:'black'
-      },
-      {
-        id:'W',bg:'goldenrod',text:'black'
-      },
-      {
-        id:'1',bg:'red',text:'white'
-      },
-      {
-        id:'2',bg:'red',text:'white'
-      },
-      {
-        id:'3',bg:'red',text:'white'
-      },
-      {
-        id:'4',bg:'green',text:'white'
-      },
-      {
-        id:'5',bg:'green',text:'white'
-      },
-      {
-        id:'6',bg:'green',text:'white'
-      },
-      {
-        id:'7',bg:'purple',text:'white'
-      },
-    ]
+
 
     //const from the navigator
       //const { id, shortName, longName, area, lines, colors } = this.props.navigation.state.params;
@@ -231,6 +164,7 @@ class SuperMap extends Component {
                 longitude: this.getLong(theStop[1])
               }}
               pinColor={ this.getColor(this.props.selectedLine,lineList) }
+              onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0]) : ()=>console.log('hi') }
             >
               <MapView.Callout
                 tooltip={false}
@@ -266,7 +200,7 @@ class SuperMap extends Component {
         }}>
           <StationPreview
             visible={this.props.previewedStation ? true : false}
-            title={'This is the title'}
+            stationName={ this.props.previewedStation }
             onClearPress={()=>this.clearStationPreview()}
           />
           <View style={{
