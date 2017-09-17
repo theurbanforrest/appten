@@ -7,7 +7,8 @@ import {
 } from 'react-native';
 import {
   Button,
-  Icon
+  Icon,
+  Badge
 } from 'react-native-elements';
 
 /*-- THE COMPONENT --*/
@@ -19,24 +20,30 @@ const StationPreview = (props: StationPreviewProps) => {
       stationName,
       lines,
       visible,
-      onClearPress
+      onClearPress,
+      onLinePress
 
     } = props;
 
   //do functions
+
+  //if lines was set, displayBadges is true
+  //let displayBadges = false;
+  //if(lines){
+  //  let displayBadges = true;
+  //}
 
   //if visible is false, return nothing
   if(visible){
     return(
         <View style={{
           position: 'absolute',
-          top: '70%',
+          top: '65%',
           right: '0%',
           width: '100%',
           padding: '3%',
-          height: '30%',
+          height: '100%',
           backgroundColor: 'black',
-          color: 'white',
         }}>
           <View style={{
             flex: 1,
@@ -46,14 +53,36 @@ const StationPreview = (props: StationPreviewProps) => {
             <View style={{
               flex: 21,
             }}>
-              <Text style={{
-                color: 'white',
-                fontSize: 24,
-              }}
-              >
-                {stationName}
-              </Text>
+              <View>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 24,
+                }}
+                >
+                  {stationName}
+                </Text>
+              </View>
+              <View style={{
+                flex: 1,
+                flexDirection: 'row'
+              }}>
+                  {
+                    lines.map( (line) => (
+                          <Badge
+                            value= {line[0]}
+                            containerStyle={{
+                              backgroundColor: line[1]
+                            }}
+                            textStyle={{
+                              color: line[2]
+                            }}
+                            onPress={() => this.getLineStops(line.id) }
+                          />
+                      ))
+                  }
+              </View>
             </View>
+
             <View style={{
               flex: 3,
               flexDirection: 'column',
@@ -66,6 +95,7 @@ const StationPreview = (props: StationPreviewProps) => {
                 onPress={onClearPress}
               />
             </View>
+
           </View>
       </View>
     )
@@ -81,7 +111,7 @@ const StationPreview = (props: StationPreviewProps) => {
         visible: true,
         //onClearPress: not setting func by default
         //lines: not setting array by default
-
+        //onLinePress: not setting func by default
     };
 
   //Define the props here
@@ -92,7 +122,8 @@ const StationPreview = (props: StationPreviewProps) => {
         stationName: PropTypes.string,
         visible: PropTypes.bool,
         onClearPress: PropTypes.func,
-        lines: PropTypes.any
+        lines: PropTypes.any,
+        onLinePress: PropTypes.func
 
     };
 

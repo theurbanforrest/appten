@@ -7,6 +7,7 @@ import { GET_PREVIEW, SELECT_LINE, CLEAR_PREVIEW } from './constants'
 
 type superMapState = {
   previewedStation: string,
+  previewedStationLines: string,
   selectedLine: string,
   selectedStops: any
 }
@@ -14,6 +15,7 @@ type superMapState = {
 const initialState:
   superMapState = {
     previewedStation: '',
+    previewedStationLines: '',
     selectedLine: '',
     selectedStops:
       [
@@ -36,25 +38,27 @@ export default handleActions(
   {
     [GET_PREVIEW]: (state: superMapState, action) => {
       //get info from action and state
-        const { payload: {station_id} } = action;
-        const { previewedStation } = state;
+        const { payload: {station_id,station_lines} } = action;
+        const { previewedStation, previewedStationLines } = state;
 
       //set station_id into previewedStation and return state
         return {
           ...state,
-          previewedStation: station_id
+          previewedStation: station_id,
+          previewedStationLines: station_lines,
         }
     },
     //add other reducers here
     [CLEAR_PREVIEW]: (state: superMapState, action) => {
       //get info from action and state
         //const {} = action;
-        const { previewedStation } = state;
+        const { previewedStation, previewedStationLines } = state;
 
       //set station_id into previewedStation and return state
         return {
           ...state,
           previewedStation: null,
+          previewedStationLines: null,
         }
     },
     [SELECT_LINE]: (state: superMapState, action) => {

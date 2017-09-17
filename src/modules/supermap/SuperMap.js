@@ -62,7 +62,6 @@ class SuperMap extends Component {
       this.props.actions.clearPreview();
 
       //close callout
-
     }
 
     getLineStops(targetLine){
@@ -109,7 +108,33 @@ class SuperMap extends Component {
       return stopsToDisplay;
     }
 
-    getColor(targetLine,data){
+
+    getStationLines(targetStation){
+      //superMapData[i][10] is the name of the station
+      //superMapData[i][11] is the string of the lat/long that needs to be regex'd
+      //superMapData[i][12] is the string of lines e.g. 'A-C-F' 
+
+      let badgesToDisplay = [];
+            for(i=0;i<superMapData.length;i++){
+              if(superMapData[i][10]==targetStation){
+                let myArr = superMapData[i][12].split('-');
+                for(k=0;k<myArr.length;k++){
+                  
+                  badgesToDisplay.push(
+                    [
+                      myArr[k],
+                      this.getBackgroundColor(myArr[k],lineList),
+                      this.getTextColor(myArr[k],lineList)
+                    ]
+                  );
+                }
+                return badgesToDisplay;
+              }
+            }
+      
+    }
+
+    getBackgroundColor(targetLine,data){
        for(i=0;i<data.length;i++){
         if(targetLine == data[i].id){
           return data[i].bg;
@@ -118,6 +143,17 @@ class SuperMap extends Component {
        }
        //if no match
        return 'light-gray';
+    }
+
+    getTextColor(targetLine,data){
+       for(i=0;i<data.length;i++){
+        if(targetLine == data[i].id){
+          return data[i].text;
+        }
+        //else i++
+       }
+       //if no match
+       return 'white';
     }
 
 
@@ -129,8 +165,6 @@ class SuperMap extends Component {
 
   //render()
   render() {
-
-
 
     //const from the navigator
       //const { id, shortName, longName, area, lines, colors } = this.props.navigation.state.params;
@@ -163,12 +197,12 @@ class SuperMap extends Component {
                 latitude: this.getLat(theStop[1]),
                 longitude: this.getLong(theStop[1])
               }}
-              pinColor={ this.getColor(this.props.selectedLine,lineList) }
-              onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0]) : ()=>console.log('hi') }
+              pinColor={ this.getBackgroundColor(this.props.selectedLine,lineList) }
+              onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[0])) : null }
             >
               <MapView.Callout
                 tooltip={false}
-                onPress={()=>this.props.actions.getPreview(theStop[0])}
+                onPress={()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[0]))}
               >
                 <View style={{
                   flex: 1,
@@ -202,6 +236,7 @@ class SuperMap extends Component {
             visible={this.props.previewedStation ? true : false}
             stationName={ this.props.previewedStation }
             onClearPress={()=>this.clearStationPreview()}
+            lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
           />
           <View style={{
             //flex: 1,
@@ -244,6 +279,7 @@ class SuperMap extends Component {
       (state) => {
         return {
           previewedStation: state.supermap.previewedStation,
+          previewedStationLines: state.supermap.previewedStationLines,
           selectedLine: state.supermap.selectedLine,
           selectedStops: state.supermap.selectedStops
         }

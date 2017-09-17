@@ -7,6 +7,7 @@ export type Action = {
   payload?: {
     //define all possible payloads and their types
       station_id: string,
+      station_lines: string,
       selected_line: string
   }
 }
@@ -22,11 +23,12 @@ export type ActionAsync = (dispatch: Function, getState: Function) => void
 //                                    newCounter action
 //  }
 
-export const getPreview = (station_id: string): Action => {
+export const getPreview = (station_id: string, station_lines: string): Action => {
   return {
     type: GET_PREVIEW,
     payload: {
-      station_id
+      station_id,
+      station_lines
     }
   }
 }
