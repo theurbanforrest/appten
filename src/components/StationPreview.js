@@ -11,6 +11,8 @@ import {
   Badge
 } from 'react-native-elements';
 
+import { lineList } from '../modules/supermap/data';
+
 /*-- THE COMPONENT --*/
 const StationPreview = (props: StationPreviewProps) => {
 
@@ -19,6 +21,7 @@ const StationPreview = (props: StationPreviewProps) => {
     const {
       stationName,
       lines,
+      selectedLine,
       visible,
       onClearPress,
       onLinePress
@@ -27,18 +30,33 @@ const StationPreview = (props: StationPreviewProps) => {
 
   //do functions
 
-  //if lines was set, displayBadges is true
-  //let displayBadges = false;
-  //if(lines){
-  //  let displayBadges = true;
-  //}
+    function getBackgroundColor(targetLine,data){
+       for(i=0;i<data.length;i++){
+        if(targetLine == data[i].id){
+          return data[i].bg;
+        }
+        //else i++
+       }
+       //if no match
+       return 'gainsboro';
+    }
 
+    function getTextColor(targetLine,data){
+       for(i=0;i<data.length;i++){
+        if(targetLine == data[i].id){
+          return data[i].text;
+        }
+        //else i++
+       }
+       //if no match
+       return 'white';
+    }
   //if visible is false, return nothing
   if(visible){
     return(
         <View style={{
           position: 'absolute',
-          top: '65%',
+          top: '75%',
           right: '0%',
           width: '100%',
           padding: '3%',
@@ -68,16 +86,16 @@ const StationPreview = (props: StationPreviewProps) => {
               }}>
                   {
                     lines.map( (line) => (
-                          <Badge
-                            value= {line[0]}
-                            containerStyle={{
-                              backgroundColor: line[1]
-                            }}
-                            textStyle={{
-                              color: line[2]
-                            }}
-                            onPress={() => this.getLineStops(line.id) }
-                          />
+                        <Badge
+                          value= {line}
+                          containerStyle={{
+                            backgroundColor: getBackgroundColor(line,lineList) //keeping static, not connected to selectedLine
+                          }}
+                          textStyle={{
+                            color: getTextColor(line,lineList) //keeping static, not connected to selectedLine
+                          }}
+                          onPress={onLinePress}
+                        />
                       ))
                   }
               </View>
@@ -112,6 +130,7 @@ const StationPreview = (props: StationPreviewProps) => {
         //onClearPress: not setting func by default
         //lines: not setting array by default
         //onLinePress: not setting func by default
+        //selectedLine: not setting string by default
     };
 
   //Define the props here
@@ -123,7 +142,8 @@ const StationPreview = (props: StationPreviewProps) => {
         visible: PropTypes.bool,
         onClearPress: PropTypes.func,
         lines: PropTypes.any,
-        onLinePress: PropTypes.func
+        onLinePress: PropTypes.func,
+        selectedLine: PropTypes.string
 
     };
 

@@ -99,16 +99,16 @@ class SuperMap extends Component {
         //else i++
       }
 
-      //return to redux, also clear any preview
+      //return to redux, trying without auto clearing preview
       this.props.actions.selectLine(targetLine, stopsToDisplay);
-      this.props.actions.clearPreview();
+      //this.props.actions.clearPreview();
 
       //return the array
       //console.log(stopsToDisplay);
       return stopsToDisplay;
     }
 
-
+    /*  Commenting out, need to figure this out.  Use other one for now
     getStationLines(targetStation){
       //superMapData[i][10] is the name of the station
       //superMapData[i][11] is the string of the lat/long that needs to be regex'd
@@ -133,6 +133,24 @@ class SuperMap extends Component {
             }
       
     }
+    */
+
+    getStationLines(linesString){
+
+      let badgesToDisplay = [];
+      let myArr = linesString.split('-');
+
+      for(i=0;i<myArr.length;i++){
+
+        badgesToDisplay.push(
+          [
+            myArr[i]
+          ]
+        );
+      }
+
+      return badgesToDisplay;
+    }
 
     getBackgroundColor(targetLine,data){
        for(i=0;i<data.length;i++){
@@ -142,7 +160,7 @@ class SuperMap extends Component {
         //else i++
        }
        //if no match
-       return 'light-gray';
+       return 'gainsboro';
     }
 
     getTextColor(targetLine,data){
@@ -198,11 +216,11 @@ class SuperMap extends Component {
                 longitude: this.getLong(theStop[1])
               }}
               pinColor={ this.getBackgroundColor(this.props.selectedLine,lineList) }
-              onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[0])) : null }
+              onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2])) : null } //this.getStationLines(theStop[0])) : null }
             >
               <MapView.Callout
                 tooltip={false}
-                onPress={()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[0]))}
+                onPress={()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2]))} //this.getStationLines(theStop[0]))}
               >
                 <View style={{
                   flex: 1,
@@ -237,6 +255,8 @@ class SuperMap extends Component {
             stationName={ this.props.previewedStation }
             onClearPress={()=>this.clearStationPreview()}
             lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
+            selectedLine = { this.props.selectedLine }
+            //onLinePress={ this.props.action.selectLine }
           />
           <View style={{
             //flex: 1,

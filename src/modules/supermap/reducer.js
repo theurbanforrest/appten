@@ -7,7 +7,7 @@ import { GET_PREVIEW, SELECT_LINE, CLEAR_PREVIEW } from './constants'
 
 type superMapState = {
   previewedStation: string,
-  previewedStationLines: string,
+  previewedStationLines: any,
   selectedLine: string,
   selectedStops: any
 }
@@ -15,7 +15,7 @@ type superMapState = {
 const initialState:
   superMapState = {
     previewedStation: '',
-    previewedStationLines: '',
+    previewedStationLines: [],
     selectedLine: '',
     selectedStops:
       [
