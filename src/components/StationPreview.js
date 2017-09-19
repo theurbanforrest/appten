@@ -24,7 +24,7 @@ const StationPreview = (props: StationPreviewProps) => {
       selectedLine,
       visible,
       onClearPress,
-      onLinePress
+
 
     } = props;
 
@@ -56,7 +56,7 @@ const StationPreview = (props: StationPreviewProps) => {
     return(
         <View style={{
           position: 'absolute',
-          top: '75%',
+          top: '70%',
           right: '0%',
           width: '100%',
           padding: '3%',
@@ -64,12 +64,15 @@ const StationPreview = (props: StationPreviewProps) => {
           backgroundColor: 'black',
         }}>
           <View style={{
-            flex: 1,
+            //flex: 1,
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-start',
           }}>
             <View style={{
               flex: 21,
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              //backgroundColor: 'pink'
             }}>
               <View>
                 <Text style={{
@@ -80,8 +83,33 @@ const StationPreview = (props: StationPreviewProps) => {
                   {stationName}
                 </Text>
               </View>
+            </View>
+            <View style={{
+              flex: 3,
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              //backgroundColor: 'violet'
+            }}>
+              <Icon 
+                name='close'
+                color='white'
+                type='font-awesome'
+                onPress={onClearPress}
+              />
+            </View>
+          </View>
+          <View style={{
+            marginTop: '3%',
+            //backgroundColor: 'pink',
+            flexDirection: 'row'
+          }}>
+            <View style={{
+              flex: 13,
+              //backgroundColor: 'powderblue'
+            }}>
               <View style={{
-                flex: 1,
+                //flex: 1,
                 flexDirection: 'row'
               }}>
                   {
@@ -94,28 +122,45 @@ const StationPreview = (props: StationPreviewProps) => {
                           textStyle={{
                             color: getTextColor(line,lineList) //keeping static, not connected to selectedLine
                           }}
-                          onPress={onLinePress}
                         />
                       ))
                   }
               </View>
+              <View style={{
+                marginTop: '6%'
+              }}>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 18,
+                }}>
+                  Today's wait: 5m
+                </Text>
+              </View>
+              <View style={{
+                marginTop: '3%'
+              }}>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 14,
+                }}>
+                  Last Uptown: 14m ago
+                </Text>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 14,
+                }}>
+                  Last Downtown: 18m ago
+                </Text>
+              </View>
             </View>
-
             <View style={{
-              flex: 3,
-              flexDirection: 'column',
-              alignItems: 'flex-end',
+              flex: 11,
+              //backgroundColor: 'violet'
             }}>
-              <Icon 
-                name='close'
-                color='purple'
-                type='font-awesome'
-                onPress={onClearPress}
-              />
             </View>
-
           </View>
-      </View>
+        </View>
+        
     )
   } else return false;
     
@@ -129,7 +174,7 @@ const StationPreview = (props: StationPreviewProps) => {
         visible: true,
         //onClearPress: not setting func by default
         //lines: not setting array by default
-        //onLinePress: not setting func by default
+
         //selectedLine: not setting string by default
     };
 
@@ -142,7 +187,6 @@ const StationPreview = (props: StationPreviewProps) => {
         visible: PropTypes.bool,
         onClearPress: PropTypes.func,
         lines: PropTypes.any,
-        onLinePress: PropTypes.func,
         selectedLine: PropTypes.string
 
     };
