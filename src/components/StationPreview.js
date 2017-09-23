@@ -63,7 +63,7 @@ const StationPreview = (props: StationPreviewProps) => {
     return(
         <View style={{
           position: 'absolute',
-          top: '75%',
+          top: '70%',
           right: '0%',
           width: '100%',
           padding: '3%',

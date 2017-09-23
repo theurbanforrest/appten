@@ -7,8 +7,8 @@
       ScrollView,
       Text,
       StyleSheet,
-      TouchableHighlight
-
+      TouchableHighlight,
+      StatusBar
     } from 'react-native'
     import { 
       Card,
@@ -27,6 +27,7 @@
     import MapView from 'react-native-maps'
     import StationPreview from  '../../components/StationPreview' //'../stationpreview/StationPreview'
     import LocationStatusButton from '../../components/LocationStatusButton'
+    import AppHeader from '../../components/AppHeader'
 
   //redux
     import { bindActionCreators } from 'redux'
@@ -210,6 +211,10 @@ class SuperMap extends Component {
     //the view
     return (
       <View style={styles.container}>
+        <StatusBar
+          //backgroundColor="black"
+          barStyle="light-content"
+        />
         <MapView
           style={{
             left: 0,
@@ -275,6 +280,9 @@ class SuperMap extends Component {
           justifyContent: 'space-around',
           alignContent: 'center'
         }}>
+          <AppHeader
+            onMenuPress={()=>this.props.navigation.navigate('DrawerOpen')}
+          />
           <StationPreview
             visible={this.props.previewedStation ? true : false}
             stationName={ this.props.previewedStation }
@@ -289,7 +297,7 @@ class SuperMap extends Component {
             //flex: 1,
             flexDirection: 'row',
             flexWrap: 'wrap',
-            marginTop: '10%',
+            marginTop: '3%',
             marginLeft: '3%',
             marginRight: '3%',
             //backgroundColor: 'powderblue',
