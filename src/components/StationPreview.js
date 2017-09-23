@@ -7,8 +7,11 @@ import {
 } from 'react-native';
 import {
   Button,
-  Icon
+  Icon,
+  Badge
 } from 'react-native-elements';
+
+import { lineList } from '../modules/supermap/data';
 
 /*-- THE COMPONENT --*/
 const StationPreview = (props: StationPreviewProps) => {
@@ -18,56 +21,154 @@ const StationPreview = (props: StationPreviewProps) => {
     const {
       stationName,
       lines,
+      selectedLine,
       visible,
-      onClearPress
+      onClearPress,
+      onLinePress,
 
     } = props;
 
   //do functions
 
+    function onBadgeLineClick(line){
+      //selectedLine = line;
+      onLinePress(line);
+
+      return true;
+    } 
+
+    function getBackgroundColor(targetLine,data){
+       for(i=0;i<data.length;i++){
+        if(targetLine == data[i].id){
+          return data[i].bg;
+        }
+        //else i++
+       }
+       //if no match
+       return 'gainsboro';
+    }
+
+    function getTextColor(targetLine,data){
+       for(i=0;i<data.length;i++){
+        if(targetLine == data[i].id){
+          return data[i].text;
+        }
+        //else i++
+       }
+       //if no match
+       return 'white';
+    }
   //if visible is false, return nothing
   if(visible){
     return(
         <View style={{
           position: 'absolute',
-          top: '70%',
+          top: '75%',
           right: '0%',
           width: '100%',
           padding: '3%',
-          height: '30%',
+          height: '100%',
           backgroundColor: 'black',
-          color: 'white',
         }}>
           <View style={{
-            flex: 1,
+            //flex: 1,
             flexDirection: 'row',
-            justifyContent: 'space-between',
+            justifyContent: 'flex-start',
           }}>
             <View style={{
               flex: 21,
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              //backgroundColor: 'pink'
             }}>
-              <Text style={{
-                color: 'white',
-                fontSize: 24,
-              }}
-              >
-                {stationName}
-              </Text>
+              <View>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 24,
+                }}
+                >
+                  {stationName}
+                </Text>
+              </View>
             </View>
             <View style={{
               flex: 3,
               flexDirection: 'column',
               alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              //backgroundColor: 'violet'
             }}>
               <Icon 
                 name='close'
-                color='purple'
+                color='white'
                 type='font-awesome'
                 onPress={onClearPress}
               />
             </View>
           </View>
-      </View>
+          <View style={{
+            marginTop: '3%',
+            //backgroundColor: 'pink',
+            flexDirection: 'row'
+          }}>
+            <View style={{
+              flex: 13,
+              //backgroundColor: 'powderblue'
+            }}>
+              <View style={{
+                //flex: 1,
+                flexDirection: 'row'
+              }}>
+                  {
+                    lines.map( (line) => (
+                        <Badge
+                          value= {line}
+                          containerStyle={{
+                            backgroundColor: getBackgroundColor(line,lineList) //keeping static, not connected to selectedLine
+                          }}
+                          textStyle={{
+                            color: getTextColor(line,lineList) //keeping static, not connected to selectedLine
+                          }}
+                          onPress={()=> onBadgeLineClick(line)}//console.log('this should be some action from redux')}
+                        />
+                      ))
+                  }
+              </View>
+              <View style={{
+                marginTop: '6%'
+              }}>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 18,
+                }}>
+                  Today's wait: 5m
+                </Text>
+              </View>
+              <View style={{
+                marginTop: '3%'
+              }}>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 14,
+                }}>
+                  Last Uptown: 14m ago
+                </Text>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 14,
+                }}>
+                  Last Downtown: 18m ago
+                </Text>
+              </View>
+            </View>
+            <View style={{
+              flex: 11,
+              //backgroundColor: 'violet'
+            }}>
+            </View>
+          </View>
+        </View>
+        
     )
   } else return false;
     
@@ -81,7 +182,8 @@ const StationPreview = (props: StationPreviewProps) => {
         visible: true,
         //onClearPress: not setting func by default
         //lines: not setting array by default
-
+        //onLinePress: not setting func by default
+        //selectedLine: not setting string by default
     };
 
   //Define the props here
@@ -92,7 +194,9 @@ const StationPreview = (props: StationPreviewProps) => {
         stationName: PropTypes.string,
         visible: PropTypes.bool,
         onClearPress: PropTypes.func,
-        lines: PropTypes.any
+        onLinePress: PropTypes.func,
+        lines: PropTypes.any,
+        selectedLine: PropTypes.string
 
     };
 

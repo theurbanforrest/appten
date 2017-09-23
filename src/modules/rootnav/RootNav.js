@@ -1,5 +1,5 @@
 import React from 'react';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { TabNavigator, StackNavigator, DrawerNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -26,7 +26,7 @@ import { connect } from 'react-redux';
   });
 
   /*-- Tabs --*/
-  export const Tabs = TabNavigator({
+  export const Tabs = DrawerNavigator({
   SuperMap: {
     screen: SuperMap,
     navigationOptions: {
