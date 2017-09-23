@@ -19,3 +19,5 @@ export const NAME = 'supermap'
 	export const GET_PREVIEW = `${NAME}/GET_PREVIEW`;
 	export const SELECT_LINE = `${NAME}/SELECT_LINE`;
 	export const CLEAR_PREVIEW = `${NAME}/CLEAR_PREVIEW`;
+	export const SET_MY_LOCATION = `${NAME}/GET_MY_LOCATION`;
+	export const CLEAR_MY_LOCATION = `${NAME}/CLEAR_MY_LOCATION`;

@@ -31,7 +31,7 @@ export default (data: Object = {}) => {
     [helloworld.NAME]: helloworld.reducer,
     [stationfeed.NAME]: stationfeed.reducer,
     [stationdetail.NAME]: stationdetail.reducer,
-    [supermap.NAME]: supermap.reducer
+    [supermap.NAME]: supermap.reducer,
   })
 
   return createStore(rootReducer, data, middleware)

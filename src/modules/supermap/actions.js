@@ -1,6 +1,6 @@
 // @flow
 
-import { GET_PREVIEW, CLEAR_PREVIEW, SELECT_LINE } from './constants'
+import { GET_PREVIEW, CLEAR_PREVIEW, SELECT_LINE, SET_MY_LOCATION, CLEAR_MY_LOCATION } from './constants'
 
 export type Action = {
   type: string,
@@ -50,3 +50,22 @@ export const selectLine = (selected_line: string, selected_stops: any): Action =
     }
   }
 }
+
+export const setMyLocation = (myLat: string, myLong: string): Action => {
+  return {
+    type: SET_MY_LOCATION,
+    payload: {
+      myLat,
+      myLong
+    }
+  }
+}
+
+export const clearMyLocation = (): Action => {
+  return {
+    type: CLEAR_MY_LOCATION
+  }
+}
+
+
+

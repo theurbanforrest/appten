@@ -24,11 +24,18 @@ const StationPreview = (props: StationPreviewProps) => {
       selectedLine,
       visible,
       onClearPress,
-
+      onLinePress,
 
     } = props;
 
   //do functions
+
+    function onBadgeLineClick(line){
+      //selectedLine = line;
+      onLinePress(line);
+
+      return true;
+    } 
 
     function getBackgroundColor(targetLine,data){
        for(i=0;i<data.length;i++){
@@ -56,7 +63,7 @@ const StationPreview = (props: StationPreviewProps) => {
     return(
         <View style={{
           position: 'absolute',
-          top: '70%',
+          top: '75%',
           right: '0%',
           width: '100%',
           padding: '3%',
@@ -122,6 +129,7 @@ const StationPreview = (props: StationPreviewProps) => {
                           textStyle={{
                             color: getTextColor(line,lineList) //keeping static, not connected to selectedLine
                           }}
+                          onPress={()=> onBadgeLineClick(line)}//console.log('this should be some action from redux')}
                         />
                       ))
                   }
@@ -174,7 +182,7 @@ const StationPreview = (props: StationPreviewProps) => {
         visible: true,
         //onClearPress: not setting func by default
         //lines: not setting array by default
-
+        //onLinePress: not setting func by default
         //selectedLine: not setting string by default
     };
 
@@ -186,6 +194,7 @@ const StationPreview = (props: StationPreviewProps) => {
         stationName: PropTypes.string,
         visible: PropTypes.bool,
         onClearPress: PropTypes.func,
+        onLinePress: PropTypes.func,
         lines: PropTypes.any,
         selectedLine: PropTypes.string
 

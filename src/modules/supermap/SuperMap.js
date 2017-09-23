@@ -25,7 +25,8 @@
     import { styles } from './styles'
     import { superMapData, lineList } from './data'
     import MapView from 'react-native-maps'
-    import StationPreview from '../../components/StationPreview'
+    import StationPreview from  '../../components/StationPreview' //'../stationpreview/StationPreview'
+    import LocationStatusButton from '../../components/LocationStatusButton'
 
   //redux
     import { bindActionCreators } from 'redux'
@@ -174,12 +175,28 @@ class SuperMap extends Component {
        return 'white';
     }
 
+    onChildChanged(targetLine){
+      this.props.actions.selectLine(targetLine);
+    }
 
-  componentWillMount() {
-    
-    //set A line as the default
-    this.getLineStops('A');
-  }
+    clickMyLocationButton(){
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+
+          this.props.actions.setMyLocation(position.coords.latitude,position.coords.longitude);
+
+        },
+        (error) => this.setState({ error: error.message }),
+        { enableHighAccuracy: true, timeout: 20000, maximumAge: 1000 },
+      );
+
+      return true;
+    }
+
+    componentWillMount() {
+      //set A line as the default
+      this.getLineStops('A');
+    }
 
   //render()
   render() {
@@ -244,11 +261,19 @@ class SuperMap extends Component {
             </MapView.Marker>
           ))
         }
-        </MapView>
+          <MapView.Marker
+            coordinate={{
+              latitude: this.props.myLocation.lat,
+              longitude: this.props.myLocation.long
+            }}
+            pinColor='black'
+          />
+          </MapView>
         <View style={{
           //flex: 1,
           flexDirection: 'column',
-          justifyContent: 'space-around'
+          justifyContent: 'space-around',
+          alignContent: 'center'
         }}>
           <StationPreview
             visible={this.props.previewedStation ? true : false}
@@ -256,8 +281,10 @@ class SuperMap extends Component {
             onClearPress={()=>this.clearStationPreview()}
             lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
             selectedLine = { this.props.selectedLine }
-            //onLinePress={ this.props.action.selectLine }
-          />
+            onLinePress={ ()=> console.log(this.props.myLocation.lat) }
+            {...this.props}
+          >
+          </StationPreview>
           <View style={{
             //flex: 1,
             flexDirection: 'row',
@@ -283,6 +310,16 @@ class SuperMap extends Component {
               )
             }
           </View>
+          <View style={{
+              flexDirection: 'column',
+              backgroundColor: 'powderblue',
+              alignItems: 'flex-start'
+            }}>
+              <LocationStatusButton
+                isSelected={ !this.props.myLocation.lat ? 'false' : 'true'}
+                onIconPress={()=> this.clickMyLocationButton() }
+              />
+            </View>
         </View>
       </View>
     )
@@ -301,7 +338,8 @@ class SuperMap extends Component {
           previewedStation: state.supermap.previewedStation,
           previewedStationLines: state.supermap.previewedStationLines,
           selectedLine: state.supermap.selectedLine,
-          selectedStops: state.supermap.selectedStops
+          selectedStops: state.supermap.selectedStops,
+          myLocation: state.supermap.myLocation
         }
       },
     //this is mapDispatchToProps verbosely
@@ -313,40 +351,3 @@ class SuperMap extends Component {
 
 /*----- APPENDIX -----*/
 
-/*
-  // regex to get lat and long is " ^(\bPOINT\b)..([^\s]+)\s([^\s]+). "  
-  // yes include that final period
-  // use $2 and $3
-
-  // let gps = superMapData[0].[11]
-  // let myRegex = /^(\bPOINT\b)..([^\s]+)\s([^\s]+)./.exec(gps)
-  // var long = myRegex[2]
-  // var lat = myRegex[3]
-
-
-*/
-
-  /*
-    This works 
-          {
-            superMapData.map( (stationData) => (
-                  <MapView.Marker
-                  coordinate={{
-                    latitude: this.getLat(stationData[11]),
-                    longitude: this.getLong(stationData[11])
-                  }}
-                >
-                  <MapView.Callout
-                    tooltip={false}
-                  >
-                    <Text style={{color: 'gray'}}>
-                      {stationData[10]}
-                    </Text>
-                    <Text style={{color: 'blue'}}>
-                      {stationData[12]}
-                    </Text>
-                  </MapView.Callout>
-                </MapView.Marker>
-            ))
-          }
-    */
