@@ -96,7 +96,7 @@ export default handleActions(
 
         const { myLocation } = state;
 
-      //set station_id into previewedStation and return state
+      //return current state with myLocation as blank
         return {
           ...state,
           myLocation: {

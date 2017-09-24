@@ -21,20 +21,20 @@ const LocationStatusButton = (props: LocationStatusButtonProps) => {
     } = props;
 
   //do functions
-    let whichColor;
+    let whichIcon;
 
     if(isSelected==true){
-      whichColor = 'purple'
+      whichIcon = 'toggle-on'
     } else {
-      whichColor = 'blue'
+      whichIcon = 'toggle-off'
     }
   
     return(
-      <View style={{flex: 1, flexDirection: 'row', justifyContent: 'center'}}>
+      <View>
           <Icon
             reverse={true}
             //raised={isSelected}
-            name='street-view'
+            name={whichIcon}
             color='purple'
             type='font-awesome'
             onPress={onIconPress}

@@ -1,14 +1,15 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types'
+import React from 'react'
 import {
   View,
   StyleSheet,
   Text
-} from 'react-native';
+} from 'react-native'
 import {
   Avatar,
   Icon,
-} from 'react-native-elements';
+} from 'react-native-elements'
+import LocationStatusButton from './LocationStatusButton'
 
 /*-- THE COMPONENT --*/
 const AppHeader = (props: AppHeaderProps) => {
@@ -18,6 +19,7 @@ const AppHeader = (props: AppHeaderProps) => {
     const {
 
       onMenuPress,
+      isLocationSet
 
     } = props;
 
@@ -40,10 +42,10 @@ const AppHeader = (props: AppHeaderProps) => {
         }}>
           <View style={{
             flex: 3,
-            flexDirection: 'row',
+            //flexDirection: 'row',
           }}>
             <Icon
-              name='reorder'
+              name='magnet'
               type='font-awesome'
               onPress={onMenuPress}
               color='white'
@@ -59,8 +61,11 @@ const AppHeader = (props: AppHeaderProps) => {
                 fontSize: 18
               }}
             >
-              UnderCrowd.io
+              Grumble.io
             </Text>
+
+            
+
           </View>
         </View>
     );
@@ -71,6 +76,7 @@ const AppHeader = (props: AppHeaderProps) => {
       //enter the default values here
 
         //onMenuPress: not setting func by default
+        //isLocationSet: not setting bool by default
     };
 
   //Define the props here
@@ -78,7 +84,8 @@ const AppHeader = (props: AppHeaderProps) => {
       //define the types here  e.g. string, object, func, any, bool, number
       //oneOfType([array of types])
 
-        onMenuPress: PropTypes.func
+        onMenuPress: PropTypes.func,
+        isLocationSet: PropTypes.bool,
 
     };
 
