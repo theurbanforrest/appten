@@ -30,23 +30,23 @@ import { connect } from 'react-redux';
   SuperMap: {
     screen: SuperMap,
     navigationOptions: {
-      tabBarLabel: 'Super Map',
-      tabBarIcon: ({ tintColor }) => <Icon name='street-view' type='font-awesome' size={25} color={tintColor} /> ,
+      drawerLabel: 'Super Map',
+      drawerIcon: ({ tintColor }) => <Icon name='street-view' type='font-awesome' size={25} color={tintColor} /> ,
     }
   },
   HelloWorld: {
     screen: HelloWorld,
     navigationOptions: {
-      tabBarLabel: 'Hello World',
-      tabBarIcon: ({ tintColor }) => <Icon name='smile-o' type='font-awesome' size={25} color={tintColor} />,
+      drawerLabel: 'Hello World',
+      drawerIcon: ({ tintColor }) => <Icon name='smile-o' type='font-awesome' size={25} color={tintColor} />,
 
     },
   },
   StationsFeed: {
     screen: StationFeedStack,
     navigationOptions: {
-      tabBarLabel: 'All Stations',
-      tabBarIcon: ({ tintColor }) => <Icon name='subway' type='font-awesome' size={25} color={tintColor} /> ,
+      drawerLabel: 'All Stations',
+      drawerIcon: ({ tintColor }) => <Icon name='subway' type='font-awesome' size={25} color={tintColor} /> ,
     }
   },
 });

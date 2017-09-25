@@ -7,8 +7,8 @@
       ScrollView,
       Text,
       StyleSheet,
-      TouchableHighlight
-
+      TouchableHighlight,
+      StatusBar
     } from 'react-native'
     import { 
       Card,
@@ -27,6 +27,7 @@
     import MapView from 'react-native-maps'
     import StationPreview from  '../../components/StationPreview' //'../stationpreview/StationPreview'
     import LocationStatusButton from '../../components/LocationStatusButton'
+    import AppHeader from '../../components/AppHeader'
 
   //redux
     import { bindActionCreators } from 'redux'
@@ -198,6 +199,17 @@ class SuperMap extends Component {
       this.getLineStops('A');
     }
 
+    hasObject(obj,val){
+
+    //if record already exists, set true
+    if(Object.values(obj).indexOf(val) > -1) {
+
+        return true;
+      }
+      //else false
+      else return false;
+    }
+
   //render()
   render() {
 
@@ -210,6 +222,10 @@ class SuperMap extends Component {
     //the view
     return (
       <View style={styles.container}>
+        <StatusBar
+          //backgroundColor="black"
+          barStyle="light-content"
+        />
         <MapView
           style={{
             left: 0,
@@ -275,6 +291,10 @@ class SuperMap extends Component {
           justifyContent: 'space-around',
           alignContent: 'center'
         }}>
+          <AppHeader
+            onMenuPress={()=>this.props.navigation.navigate('DrawerOpen')}
+            isLocationSet={ (this.props.myLocation.lat) ? true : false }
+          />
           <StationPreview
             visible={this.props.previewedStation ? true : false}
             stationName={ this.props.previewedStation }
@@ -289,7 +309,7 @@ class SuperMap extends Component {
             //flex: 1,
             flexDirection: 'row',
             flexWrap: 'wrap',
-            marginTop: '10%',
+            marginTop: '3%',
             marginLeft: '3%',
             marginRight: '3%',
             //backgroundColor: 'powderblue',
@@ -309,17 +329,30 @@ class SuperMap extends Component {
                 )
               )
             }
+
           </View>
+          
           <View style={{
-              flexDirection: 'column',
-              backgroundColor: 'powderblue',
-              alignItems: 'flex-start'
-            }}>
-              <LocationStatusButton
-                isSelected={ !this.props.myLocation.lat ? 'false' : 'true'}
-                onIconPress={()=> this.clickMyLocationButton() }
-              />
-            </View>
+            position: 'absolute',
+            top: '85%',
+            right: '5%',
+            //width: '100%',
+            //padding: '3%',
+            //height: '100%',
+            //backgroundColor: 'black',
+            flexDirection: 'row'
+          }}>
+            <Icon
+              reverse='true'
+              name='exclamation-triangle'
+              type='font-awesome'
+              color='purple'
+            />
+            <LocationStatusButton
+              isSelected={ (this.props.myLocation.lat) ? true : false }
+              onIconPress={()=> this.clickMyLocationButton() }
+            />
+          </View>
         </View>
       </View>
     )
