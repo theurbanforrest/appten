@@ -34,7 +34,7 @@ const AppHeader = (props: AppHeaderProps) => {
           paddingTop: '5%',
           paddingBottom: '2%',
           paddingLeft: '3%',
-          height: '10%',
+          height: '12%',
           backgroundColor: 'black', 
           flexDirection: 'row',
           //justifyContent: 'center',
@@ -45,15 +45,15 @@ const AppHeader = (props: AppHeaderProps) => {
             //flexDirection: 'row',
             //justifyContent: 'space-around'
           }}>
-            <Icon
-              name='ellipsis-v'
-              type='font-awesome'
+            <Avatar
+              small
+              rounded
+              source={{uri: 'https://randomuser.me/api/portraits/women/29.jpg' }}
               onPress={onMenuPress}
-              color='white'
             />
           </View>
           <View style={{
-            flex: 21
+            flex: 18
           }}>
             <Text
               style={{
@@ -62,8 +62,27 @@ const AppHeader = (props: AppHeaderProps) => {
                 fontSize: 18
               }}
             >
-              Grumblr
+              fochin82
             </Text>
+            <Text
+              style={{
+                color: 'white',
+                //fontFamily: 'serif',
+                fontSize: 14
+              }}
+            >
+              Level 3 - 23/50 - 27 pts to lvl 4
+            </Text>
+          </View>
+          <View style={{
+            flex: 3
+          }}>
+            <Icon
+              name='ellipsis-v'
+              type='font-awesome'
+              onPress={onMenuPress}
+              color='white'
+            />
           </View>
         </View>
     );

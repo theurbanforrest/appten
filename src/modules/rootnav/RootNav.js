@@ -69,13 +69,10 @@ import { connect } from 'react-redux';
   /*-- Connect --*/
   export default connect(
     state => ({
-      //age: state.helloworld.age
+      //not needed
 
     }),
     dispatch => ({
-      /*addNewCounter: () => dispatch(actions.newCounter()),
-      increment: id => dispatch(actions.increment(id)),
-      decrement: id => dispatch(actions.decrement(id)),
-      incrementWithDelay: id => dispatch(actions.incrementWithDelay(id))*/
+      //not needed
     })
   )(RootNav)

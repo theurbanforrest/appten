@@ -277,6 +277,21 @@ class SuperMap extends Component {
             </MapView.Marker>
           ))
         }
+        <View style={{
+            //position: 'absolute',
+            //top: '85%',
+            //right: '5%',
+            //width: '100%',
+            //padding: '3%',
+            //height: '100%',
+            //backgroundColor: 'black',
+            flexDirection: 'row'
+          }}>
+            <LocationStatusButton
+              isSelected={ (this.props.myLocation.lat) ? true : false }
+              onIconPress={()=> this.clickMyLocationButton() }
+            />
+          </View>
           <MapView.Marker
             coordinate={{
               latitude: this.props.myLocation.lat,
@@ -301,8 +316,14 @@ class SuperMap extends Component {
             onClearPress={()=>this.clearStationPreview()}
             lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
             selectedLine = { this.props.selectedLine }
-            onLinePress={ ()=> console.log(this.props.myLocation.lat) }
-            {...this.props}
+            onFeedPress = {()=> this.props.navigation.navigate('StationDetail',{
+                area: 'Queens',
+                colors: 'blue,orange,purple',
+                id: 4,
+                lines: 'E,F,7',
+                longName: 'Long Name',
+                shortName: 'Shortish Name'
+              })}
           >
           </StationPreview>
           <View style={{
@@ -330,36 +351,6 @@ class SuperMap extends Component {
               )
             }
 
-          </View>
-          
-          <View style={{
-            position: 'absolute',
-            top: '85%',
-            right: '5%',
-            //width: '100%',
-            //padding: '3%',
-            //height: '100%',
-            //backgroundColor: 'black',
-            flexDirection: 'row'
-          }}>
-            <Icon
-              reverse='true'
-              name='comments-o'
-              type='font-awesome'
-              color='purple'
-              onPress={()=>this.props.navigation.navigate('StationDetail',{
-                area: 'Queens',
-                colors: 'blue,orange,purple',
-                id: 4,
-                lines: 'E,F,7',
-                longName: 'Long Name',
-                shortName: 'Shortish Name'
-              })}
-            />
-            <LocationStatusButton
-              isSelected={ (this.props.myLocation.lat) ? true : false }
-              onIconPress={()=> this.clickMyLocationButton() }
-            />
           </View>
         </View>
       </View>

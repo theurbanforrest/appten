@@ -25,6 +25,7 @@ const StationPreview = (props: StationPreviewProps) => {
       visible,
       onClearPress,
       onLinePress,
+      onFeedPress
 
     } = props;
 
@@ -63,7 +64,7 @@ const StationPreview = (props: StationPreviewProps) => {
     return(
         <View style={{
           position: 'absolute',
-          top: '70%',
+          top: '75%',
           right: '0%',
           width: '100%',
           padding: '3%',
@@ -84,7 +85,7 @@ const StationPreview = (props: StationPreviewProps) => {
               <View>
                 <Text style={{
                   color: 'white',
-                  fontSize: 24,
+                  fontSize: 18,
                 }}
                 >
                   {stationName}
@@ -139,9 +140,9 @@ const StationPreview = (props: StationPreviewProps) => {
               }}>
                 <Text style={{
                   color: 'white',
-                  fontSize: 18,
+                  fontSize: 14,
                 }}>
-                  Today's wait: 5m
+                  5 check-ins today
                 </Text>
               </View>
               <View style={{
@@ -151,21 +152,46 @@ const StationPreview = (props: StationPreviewProps) => {
                   color: 'white',
                   fontSize: 14,
                 }}>
-                  Last Uptown: 14m ago
+                  Uptown wait: 5m
                 </Text>
                 <Text style={{
                   color: 'white',
                   fontSize: 14,
                 }}>
-                  Last Downtown: 18m ago
+                  Downtown wait: 4m
                 </Text>
               </View>
             </View>
             <View style={{
               flex: 11,
+              flexDirection: 'row',
+              alignItems: 'space-between',
+              justifyContent: 'flex-end',
               //backgroundColor: 'violet'
             }}>
+              <Icon
+                reverse={true}
+                name='question-circle-o'
+                type='font-awesome'
+                color='purple'
+                //onPress={onFeedPress}
+              />
+              <Icon
+                reverse={true}
+                name='comments-o'
+                type='font-awesome'
+                color='purple'
+                onPress={onFeedPress}
+              />
+              <Icon
+                reverse={true}
+                name='edit'
+                type='font-awesome'
+                color='purple'
+                //onPress={onFeedPress}
+              />
             </View>
+
           </View>
         </View>
         
@@ -184,6 +210,7 @@ const StationPreview = (props: StationPreviewProps) => {
         //lines: not setting array by default
         //onLinePress: not setting func by default
         //selectedLine: not setting string by default
+        //onFeedPress: not setting func by default
     };
 
   //Define the props here
@@ -196,7 +223,8 @@ const StationPreview = (props: StationPreviewProps) => {
         onClearPress: PropTypes.func,
         onLinePress: PropTypes.func,
         lines: PropTypes.any,
-        selectedLine: PropTypes.string
+        selectedLine: PropTypes.string,
+        onFeedPress: PropTypes.func
 
     };
 
