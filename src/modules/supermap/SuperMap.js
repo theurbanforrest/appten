@@ -344,9 +344,17 @@ class SuperMap extends Component {
           }}>
             <Icon
               reverse='true'
-              name='exclamation-triangle'
+              name='comments-o'
               type='font-awesome'
               color='purple'
+              onPress={()=>this.props.navigation.navigate('StationDetail',{
+                area: 'Queens',
+                colors: 'blue,orange,purple',
+                id: 4,
+                lines: 'E,F,7',
+                longName: 'Long Name',
+                shortName: 'Shortish Name'
+              })}
             />
             <LocationStatusButton
               isSelected={ (this.props.myLocation.lat) ? true : false }
@@ -372,8 +380,9 @@ class SuperMap extends Component {
           previewedStationLines: state.supermap.previewedStationLines,
           selectedLine: state.supermap.selectedLine,
           selectedStops: state.supermap.selectedStops,
-          myLocation: state.supermap.myLocation
-        }
+          myLocation: state.supermap.myLocation,
+          //tagline: state.stationfeed.targetLine   //this works, able to get ANYTHING from redux state
+        } 
       },
     //this is mapDispatchToProps verbosely
       //Which action creators does it want to receive by props?
