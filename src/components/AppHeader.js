@@ -43,9 +43,10 @@ const AppHeader = (props: AppHeaderProps) => {
           <View style={{
             flex: 3,
             //flexDirection: 'row',
+            //justifyContent: 'space-around'
           }}>
             <Icon
-              name='magnet'
+              name='ellipsis-v'
               type='font-awesome'
               onPress={onMenuPress}
               color='white'
@@ -61,11 +62,8 @@ const AppHeader = (props: AppHeaderProps) => {
                 fontSize: 18
               }}
             >
-              Grumble.io
+              Grumblr
             </Text>
-
-            
-
           </View>
         </View>
     );
