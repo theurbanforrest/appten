@@ -30,7 +30,11 @@ class HelloWorld extends Component {
 
   render() {
     return (
-      <View style={{ flexGrow: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <View style={{ 
+        flexGrow: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
         <Text>Latitude: {this.state.latitude}</Text>
         <Text>Longitude: {this.state.longitude}</Text>
         {this.state.error ? <Text>Error: {this.state.error}</Text> : null}

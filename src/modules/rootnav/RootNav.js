@@ -9,6 +9,9 @@ import { connect } from 'react-redux';
   import StationDetail from '../stationdetail/StationDetail'
   import SuperMap from '../supermap/SuperMap'
 
+  //test component
+  import ModalExample from '../../components/ModalExample'
+
 /*-- StationFeed Stack --*/
   export const StationFeedStack = StackNavigator({
     StationFeed: {
@@ -51,6 +54,19 @@ import { connect } from 'react-redux';
   },
 });
 
+  /**-- SettingsStack --**/
+
+  export const SettingsStack = StackNavigator({
+    ModalExample: {
+      screen: ModalExample,
+
+    },
+  },
+  {
+    headerMode: 'none'
+  },
+);
+
 
 
   /*-- RootNav --*/
@@ -59,6 +75,9 @@ import { connect } from 'react-redux';
   		Tabs: {
   			screen: Tabs,
   		},
+      SettingsStack: {
+        screen: SettingsStack
+      },
   	}, 
   	{
   		mode: 'modal',

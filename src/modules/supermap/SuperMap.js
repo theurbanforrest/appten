@@ -316,6 +316,7 @@ class SuperMap extends Component {
             onClearPress={()=>this.clearStationPreview()}
             lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
             selectedLine = { this.props.selectedLine }
+            onLinePress = {()=> this.props.navigation.navigate('SettingsStack')}
             onFeedPress = {()=> this.props.navigation.navigate('StationDetail',{
                 area: 'Queens',
                 colors: 'blue,orange,purple',
