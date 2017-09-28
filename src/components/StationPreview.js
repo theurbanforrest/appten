@@ -188,7 +188,7 @@ const StationPreview = (props: StationPreviewProps) => {
                 name='edit'
                 type='font-awesome'
                 color='purple'
-                //onPress={onFeedPress}
+                onPress={onLinePress}
               />
             </View>
 
