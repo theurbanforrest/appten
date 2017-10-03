@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, Modal } from 'react-native';
 import { Button } from 'react-native-elements';
 
 class HelloWorld extends Component {
@@ -42,6 +42,8 @@ class HelloWorld extends Component {
           title='Get em boo'
           onPress={() => this.hello() }
         />
+
+
       </View>
     );
   }

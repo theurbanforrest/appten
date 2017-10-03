@@ -5,7 +5,7 @@
 //base on module's name
 
 //name of this modules
-export const NAME = 'supermap'
+export const NAME = 'checkinflow'
 
 //action types
 //export const INCREMENT = `${NAME}/INCREMENT`
@@ -16,10 +16,5 @@ export const NAME = 'supermap'
 
 
 	//added by forrest
-	export const GET_PREVIEW = `${NAME}/GET_PREVIEW`;
-	export const SELECT_LINE = `${NAME}/SELECT_LINE`;
-	export const CLEAR_PREVIEW = `${NAME}/CLEAR_PREVIEW`;
-	export const SET_MY_LOCATION = `${NAME}/GET_MY_LOCATION`;
-	export const CLEAR_MY_LOCATION = `${NAME}/CLEAR_MY_LOCATION`;
-	export const START_CHECK_IN = `${NAME}/START_CHECK_IN`;
-	export const END_CHECK_IN = `${NAME}/END_CHECK_IN`;
+	export const START_FLOW = `${NAME}/START_FLOW`;
+	export const END_FLOW = `${NAME}/END_FLOW`;

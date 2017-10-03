@@ -14,6 +14,7 @@ import thunk from 'redux-thunk'
 	import { stationfeed } from './modules'
 	import { stationdetail } from './modules'
 	import { supermap } from './modules'
+	import { checkinflow } from './modules'
 
 
 	//added by forrest for debug logging
@@ -32,6 +33,7 @@ export default (data: Object = {}) => {
     [stationfeed.NAME]: stationfeed.reducer,
     [stationdetail.NAME]: stationdetail.reducer,
     [supermap.NAME]: supermap.reducer,
+    [checkinflow.NAME]: checkinflow.reducer,
   })
 
   return createStore(rootReducer, data, middleware)

@@ -28,6 +28,9 @@
     import StationPreview from  '../../components/StationPreview' //'../stationpreview/StationPreview'
     import LocationStatusButton from '../../components/LocationStatusButton'
     import AppHeader from '../../components/AppHeader'
+    import CheckInThree from '../../components/CheckInThree'
+
+    import CheckInFlow from '../checkinflow/CheckInFlow'
 
   //redux
     import { bindActionCreators } from 'redux'
@@ -63,7 +66,8 @@ class SuperMap extends Component {
       //send to redux
       this.props.actions.clearPreview();
 
-      //close callout
+      //HACK- closes CheckInThree - need to improve in future
+
     }
 
     getLineStops(targetLine){
@@ -210,6 +214,16 @@ class SuperMap extends Component {
       else return false;
     }
 
+    toggleCheckInStatus() {
+
+      if(this.props.checkInIsComplete){
+
+        this.props.actions.startCheckIn();
+      }
+
+      else this.props.actions.endCheckIn();
+    }
+
   //render()
   render() {
 
@@ -237,8 +251,8 @@ class SuperMap extends Component {
           initialRegion={{
             latitude: 40.7590,      //specific point (N/E is positive, S/W is negative)
             longitude: -73.9845,    //this is Times Square i.e.
-            latitudeDelta: 0.3,     //wideness of view (smaller is more precise)
-            longitudeDelta: 0.3,
+            latitudeDelta: 0.05,     //wideness of view (smaller is more precise)
+            longitudeDelta: 0.05,
           }}
         >
         {
@@ -310,6 +324,7 @@ class SuperMap extends Component {
             onMenuPress={()=>this.props.navigation.navigate('DrawerOpen')}
             isLocationSet={ (this.props.myLocation.lat) ? true : false }
           />
+
           <StationPreview
             visible={this.props.previewedStation ? true : false}
             stationName={ this.props.previewedStation }
@@ -325,6 +340,7 @@ class SuperMap extends Component {
                 longName: 'Long Name',
                 shortName: 'Shortish Name'
               })}
+            onCheckInPress = {() => this.toggleCheckInStatus() }
           >
           </StationPreview>
           <View style={{
@@ -353,6 +369,9 @@ class SuperMap extends Component {
             }
 
           </View>
+          <CheckInFlow
+            visible={this.props.checkInIsComplete ? false : true}  
+          />
         </View>
       </View>
     )
@@ -373,6 +392,7 @@ class SuperMap extends Component {
           selectedLine: state.supermap.selectedLine,
           selectedStops: state.supermap.selectedStops,
           myLocation: state.supermap.myLocation,
+          checkInIsComplete: state.supermap.checkInIsComplete,
           //tagline: state.stationfeed.targetLine   //this works, able to get ANYTHING from redux state
         } 
       },

@@ -1,6 +1,13 @@
 // @flow
 
-import { GET_PREVIEW, CLEAR_PREVIEW, SELECT_LINE, SET_MY_LOCATION, CLEAR_MY_LOCATION } from './constants'
+import { 
+  GET_PREVIEW, 
+  CLEAR_PREVIEW, 
+  SELECT_LINE, 
+  SET_MY_LOCATION, 
+  CLEAR_MY_LOCATION,
+  START_CHECK_IN,
+  END_CHECK_IN} from './constants'
 
 export type Action = {
   type: string,
@@ -67,5 +74,15 @@ export const clearMyLocation = (): Action => {
   }
 }
 
+export const startCheckIn = (): Action => {
+  return {
+    type: START_CHECK_IN
+  }
+}
 
+export const endCheckIn = (): Action => {
+  return {
+    type: END_CHECK_IN
+  }
+}
 
