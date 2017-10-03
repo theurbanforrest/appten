@@ -1,7 +1,7 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
-import { START_FLOW } from './constants'
+import { START_FLOW, END_FLOW } from './constants'
 
 
 
@@ -34,7 +34,20 @@ export default handleActions(
       //set station_id into previewedStation and return state
         return {
           ...state,
+          isComplete: false,
           stationId: station_id,
+        }
+    },
+
+    [END_FLOW]: (state: checkInFlowState, action) => {
+      //get info from action and state
+        //const { payload: {station_id} } = action;
+        const { isComplete } = state;
+
+      //set station_id into previewedStation and return state
+        return {
+          ...state,
+          isComplete: true,
         }
     },
 

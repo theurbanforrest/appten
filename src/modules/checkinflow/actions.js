@@ -1,6 +1,6 @@
 // @flow
 
-import { START_FLOW } from './constants'
+import { START_FLOW, END_FLOW } from './constants'
 
 export type Action = {
   type: string,
@@ -28,5 +28,11 @@ export const startFlow = (station_id: string,): Action => {
     payload: {
       station_id
     }
+  }
+}
+
+export const endFlow = (): Action => {
+  return {
+    type: END_FLOW,
   }
 }

@@ -1,11 +1,19 @@
 // @flow
 
 import { handleActions } from 'redux-actions'
-import { GET_PREVIEW, SELECT_LINE, CLEAR_PREVIEW, SET_MY_LOCATION, CLEAR_MY_LOCATION } from './constants'
+import { 
+  GET_PREVIEW, 
+  SELECT_LINE, 
+  CLEAR_PREVIEW, 
+  SET_MY_LOCATION, 
+  CLEAR_MY_LOCATION,
+  START_CHECK_IN,
+  END_CHECK_IN } from './constants'
 
 
 
 type superMapState = {
+  checkInIsComplete: bool,
   previewedStation: string,
   previewedStationLines: any,
   selectedLine: string,
@@ -15,6 +23,7 @@ type superMapState = {
 
 const initialState:
   superMapState = {
+    checkInIsComplete: true,
     previewedStation: '',
     previewedStationLines: [],
     selectedLine: '',
@@ -101,6 +110,26 @@ export default handleActions(
           ...state,
           myLocation: {
           }
+        }
+    },
+    [START_CHECK_IN]: (state: superMapState, action) => {
+
+        //const { myLocation } = state;
+
+      //return current state with myLocation as blank
+        return {
+          ...state,
+          checkInIsComplete: false,
+        }
+    },
+    [END_CHECK_IN]: (state: superMapState, action) => {
+
+        //const { myLocation } = state;
+
+      //return current state with myLocation as blank
+        return {
+          ...state,
+          checkInIsComplete: true,
         }
     },
   },

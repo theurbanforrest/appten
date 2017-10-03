@@ -21,3 +21,5 @@ export const NAME = 'supermap'
 	export const CLEAR_PREVIEW = `${NAME}/CLEAR_PREVIEW`;
 	export const SET_MY_LOCATION = `${NAME}/GET_MY_LOCATION`;
 	export const CLEAR_MY_LOCATION = `${NAME}/CLEAR_MY_LOCATION`;
+	export const START_CHECK_IN = `${NAME}/START_CHECK_IN`;
+	export const END_CHECK_IN = `${NAME}/END_CHECK_IN`;

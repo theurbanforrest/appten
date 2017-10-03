@@ -25,7 +25,8 @@ const StationPreview = (props: StationPreviewProps) => {
       visible,
       onClearPress,
       onLinePress,
-      onFeedPress
+      onFeedPress,
+      onCheckInPress
 
     } = props;
 
@@ -188,7 +189,7 @@ const StationPreview = (props: StationPreviewProps) => {
                 name='edit'
                 type='font-awesome'
                 color='purple'
-                onPress={onLinePress}
+                onPress={onCheckInPress}
               />
             </View>
 
@@ -224,7 +225,8 @@ const StationPreview = (props: StationPreviewProps) => {
         onLinePress: PropTypes.func,
         lines: PropTypes.any,
         selectedLine: PropTypes.string,
-        onFeedPress: PropTypes.func
+        onFeedPress: PropTypes.func,
+        onCheckInPress: PropTypes.func,
 
     };
 

@@ -17,3 +17,4 @@ export const NAME = 'checkinflow'
 
 	//added by forrest
 	export const START_FLOW = `${NAME}/START_FLOW`;
+	export const END_FLOW = `${NAME}/END_FLOW`;
