@@ -23,6 +23,7 @@ class ModalExample extends Component {
           onRequestClose={() => {alert("Modal has been closed.")}}
           >
          <View style={{
+            flex: 1,
             marginTop: 22,
             height: '50%'
           }}>

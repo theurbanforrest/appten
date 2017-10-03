@@ -3,6 +3,8 @@ import helloworld from './helloworld'
 import stationfeed from './stationfeed'
 import stationdetail from './stationdetail'
 import supermap from './supermap'
+import checkinflow from './checkinflow'
+
 //in this section keep importing yout modules
 
 //and exporting them here
@@ -11,3 +13,4 @@ export { helloworld }
 export { stationfeed }
 export { stationdetail }
 export { supermap }
+export { checkinflow }

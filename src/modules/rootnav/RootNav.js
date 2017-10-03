@@ -10,7 +10,8 @@ import { connect } from 'react-redux';
   import SuperMap from '../supermap/SuperMap'
 
   //test component
-  import ModalExample from '../../components/ModalExample'
+  import CheckInOne from '../../components/CheckInOne'
+  import CheckInTwo from '../../components/CheckInTwo'
 
 /*-- StationFeed Stack --*/
   export const StationFeedStack = StackNavigator({
@@ -52,13 +53,20 @@ import { connect } from 'react-redux';
       drawerIcon: ({ tintColor }) => <Icon name='subway' type='font-awesome' size={25} color={tintColor} /> ,
     }
   },
+  SocialFeed: {
+    screen: StationDetail,
+    navigationOptions: {
+      drawerLabel: 'Social Feed',
+      drawerIcon: ({ tintColor }) => <Icon name='comments-o' type='font-awesome' size={25} color={tintColor} /> ,
+    }
+  },
 });
 
   /**-- SettingsStack --**/
 
   export const SettingsStack = StackNavigator({
-    ModalExample: {
-      screen: ModalExample,
+    CheckInOne: {
+      screen: CheckInOne,
 
     },
   },
