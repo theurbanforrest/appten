@@ -255,57 +255,42 @@ class SuperMap extends Component {
             longitudeDelta: 0.05,
           }}
         >
-        {
-          this.props.selectedStops.map( (theStop) => (
-            <MapView.Marker
-              coordinate={{
-                latitude: this.getLat(theStop[1]),
-                longitude: this.getLong(theStop[1])
-              }}
-              pinColor={ this.getBackgroundColor(this.props.selectedLine,lineList) }
-              onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2])) : null } //this.getStationLines(theStop[0])) : null }
-            >
-              <MapView.Callout
-                tooltip={false}
-                onPress={()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2]))} //this.getStationLines(theStop[0]))}
+          {
+            this.props.selectedStops.map( (theStop) => (
+              <MapView.Marker
+                coordinate={{
+                  latitude: this.getLat(theStop[1]),
+                  longitude: this.getLong(theStop[1])
+                }}
+                pinColor={ this.getBackgroundColor(this.props.selectedLine,lineList) }
+                onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2])) : null } //this.getStationLines(theStop[0])) : null }
               >
-                <View style={{
-                  flex: 1,
-                  flexDirection: 'column',
-                }}>
-                  <Text style={{
+                <MapView.Callout
+                  tooltip={false}
+                  onPress={()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2]))} //this.getStationLines(theStop[0]))}
+                >
+                  <View style={{
                     flex: 1,
-                    color: 'black'}}
-                  >
-                    {theStop[0]} >
-                  </Text>
-                  <Text style={{
-                    flex: 1,
-                    color: 'gray'
+                    flexDirection: 'column',
                   }}>
-                    {theStop[2]}
-                  </Text>
-                </View>
-              </MapView.Callout>
-              
-            </MapView.Marker>
-          ))
-        }
-        <View style={{
-            //position: 'absolute',
-            //top: '85%',
-            //right: '5%',
-            //width: '100%',
-            //padding: '3%',
-            //height: '100%',
-            //backgroundColor: 'black',
-            flexDirection: 'row'
-          }}>
-            <LocationStatusButton
-              isSelected={ (this.props.myLocation.lat) ? true : false }
-              onIconPress={()=> this.clickMyLocationButton() }
-            />
-          </View>
+                    <Text style={{
+                      flex: 1,
+                      color: 'black'}}
+                    >
+                      {theStop[0]} >
+                    </Text>
+                    <Text style={{
+                      flex: 1,
+                      color: 'gray'
+                    }}>
+                      {theStop[2]}
+                    </Text>
+                  </View>
+                </MapView.Callout>
+                
+              </MapView.Marker>
+            ))
+          }
           <MapView.Marker
             coordinate={{
               latitude: this.props.myLocation.lat,
@@ -313,18 +298,15 @@ class SuperMap extends Component {
             }}
             pinColor='black'
           />
-          </MapView>
+        </MapView>
+
+        
         <View style={{
           //flex: 1,
           flexDirection: 'column',
           justifyContent: 'space-around',
           alignContent: 'center'
         }}>
-          <AppHeader
-            onMenuPress={()=>this.props.navigation.navigate('DrawerOpen')}
-            isLocationSet={ (this.props.myLocation.lat) ? true : false }
-          />
-
           <StationPreview
             visible={this.props.previewedStation ? true : false}
             stationName={ this.props.previewedStation }
@@ -343,11 +325,18 @@ class SuperMap extends Component {
             onCheckInPress = {() => this.toggleCheckInStatus() }
           >
           </StationPreview>
+
+          <AppHeader
+            onMenuPress={()=>this.props.navigation.navigate('DrawerOpen')}
+            isLocationSet={ (this.props.myLocation.lat) ? true : false }
+          />
           <View style={{
+            //position: 'absolute',
+            top: '135%',
             //flex: 1,
             flexDirection: 'row',
             flexWrap: 'wrap',
-            marginTop: '3%',
+            //marginTop: '3%',
             marginLeft: '3%',
             marginRight: '3%',
             //backgroundColor: 'powderblue',
@@ -367,11 +356,19 @@ class SuperMap extends Component {
                 )
               )
             }
-
           </View>
           <CheckInFlow
             visible={this.props.checkInIsComplete ? false : true}  
           />
+
+          <View style={{
+            top: '50%',
+            left: '65%'
+          }}>
+            <LocationStatusButton
+              onIconPress={() => this.toggleCheckInStatus()}
+            />
+          </View>
         </View>
       </View>
     )
