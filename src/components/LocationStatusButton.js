@@ -24,18 +24,19 @@ const LocationStatusButton = (props: LocationStatusButtonProps) => {
     let whichIcon;
 
     if(isSelected==true){
-      whichIcon = 'toggle-on'
+      whichIcon = 'user-plus'
     } else {
-      whichIcon = 'toggle-off'
+      whichIcon = 'user-plus'
     }
   
     return(
       <View>
           <Icon
             reverse={true}
+            size={40}
             //raised={isSelected}
             name={whichIcon}
-            color='purple'
+            color='goldenrod'
             type='font-awesome'
             onPress={onIconPress}
           />

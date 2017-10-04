@@ -27,12 +27,12 @@ const AppHeader = (props: AppHeaderProps) => {
 
     return(
         <View style={{
-          //position: 'absolute',
-          //top: '0%',
+          position: 'absolute',
+          top: '88%',
           //right: '0%',
           width: '100%',
-          paddingTop: '5%',
-          paddingBottom: '2%',
+          //paddingTop: '5%',
+          //paddingBottom: '2%',
           paddingLeft: '3%',
           height: '12%',
           backgroundColor: 'black', 

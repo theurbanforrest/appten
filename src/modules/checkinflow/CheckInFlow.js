@@ -54,7 +54,7 @@ class CheckInFlow extends Component {
 
       <View style={{
         position: 'absolute',
-        top: '12%',
+        top: '25%',
         right: '0%',
         width: '100%',
         padding: '3%',
@@ -184,10 +184,12 @@ class CheckInFlow extends Component {
 
 CheckInFlow.propTypes = {
   visible: PropTypes.bool,
+  onExitPress: PropTypes.func,
 }
 
 CheckInFlow.defaultProps = {
-  visible: false
+  visible: false,
+  //onExitPress: not setting by default
 }
 
 
