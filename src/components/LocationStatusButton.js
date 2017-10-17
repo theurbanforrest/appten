@@ -33,7 +33,7 @@ const LocationStatusButton = (props: LocationStatusButtonProps) => {
       <View>
           <Icon
             reverse={true}
-            size={40}
+            size={30}
             //raised={isSelected}
             name={whichIcon}
             color='goldenrod'

@@ -11,7 +11,7 @@ import {
   Badge
 } from 'react-native-elements'
 
-import FeaturedComment from './FeaturedComment'
+import CommentCard from './CommentCard'
 import { lineList } from '../modules/supermap/data'
 
 /*-- THE COMPONENT --*/
@@ -64,18 +64,26 @@ const StationPreview = (props: StationPreviewProps) => {
   //if visible is false, return nothing
   if(visible){
     return(
-      <View style={{
-        padding: '3%',
-        paddingTop: '10%',
-        backgroundColor: 'black',   //need to figure out how to render this properly
-        flexDirection: 'column',
-        flex: 1,
-      }}>
-          <View style={{
+        <View style={{
+
+          padding: '3%',
+          paddingTop: '10%',
+          backgroundColor: 'black',   //need to figure out how to render this properly
+        
+          }}>
+          
+          <View>
+            <View style={{
             //flex: 1,
             flexDirection: 'row',
             justifyContent: 'flex-start',
           }}>
+            <View style={{
+              flex: 21,
+              flexDirection: 'column',
+              alignItems: 'flex-start',
+              //backgroundColor: 'pink'
+            }}>
               <View>
                 <Text style={{
                   color: 'white',
@@ -85,11 +93,34 @@ const StationPreview = (props: StationPreviewProps) => {
                   {stationName}
                 </Text>
               </View>
+            </View>
+            <View style={{
+              flex: 3,
+              flexDirection: 'column',
+              alignItems: 'flex-end',
+              justifyContent: 'space-between',
+              //backgroundColor: 'violet'
+            }}>
+              <Icon 
+                name='close'
+                color='white'
+                type='font-awesome'
+                onPress={onClearPress}
+              />
+            </View>
           </View>
           <View style={{
+            marginTop: '3%',
+            //backgroundColor: 'pink',
+            flexDirection: 'row'
+          }}>
+            <View style={{
+              flex: 13,
+              //backgroundColor: 'powderblue'
+            }}>
+              <View style={{
                 //flex: 1,
-                flexDirection: 'row',
-                paddingTop: '1%',
+                flexDirection: 'row'
               }}>
                   {
                     lines.map( (line) => (
@@ -105,17 +136,68 @@ const StationPreview = (props: StationPreviewProps) => {
                         />
                       ))
                   }
-          </View>
-          <View style={{
-            flex: 1,
-            flexDirection: 'row',
-            //padding:'3%',
-            //backgroundColor: 'black'
-          }}>
+              </View>
+              <View style={{
+                marginTop: '6%'
+              }}>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 14,
+                }}>
+                  Last 30 mins:
+                </Text>
+              </View>
+              <View style={{
+                marginTop: '3%'
+              }}>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 14,
+                }}>
+                  12 Too Crowded
+                </Text>
+                <Text style={{
+                  color: 'white',
+                  fontSize: 14,
+                }}>
+                  5 Long Wait
+                </Text>
+              </View>
+            </View>
             <View style={{
-              flex: 22
+              flex: 11,
+              flexDirection: 'row',
+              alignItems: 'space-between',
+              justifyContent: 'flex-end',
+              //backgroundColor: 'violet'
             }}>
-              <FeaturedComment
+              <Icon
+                reverse={true}
+                name='meh-o'
+                type='font-awesome'
+                color='purple'
+                onPress={onLinePress}
+              />
+              <Icon
+                reverse={true}
+                name='clock-o'
+                type='font-awesome'
+                color='purple'
+                onPress={onLinePress}
+              />
+              <Icon
+                reverse={true}
+                name='comment-o'
+                type='font-awesome'
+                color='purple'
+                onPress={onFeedPress}
+              />
+            </View>
+          </View>
+            <View style={{
+              backgroundColor: 'black'
+            }}>
+              <CommentCard
                 title={'fochin82'}
                 imageSrc={'https://randomuser.me/api/portraits/men/18.jpg'}
                 comment={'omg this is like the second day that this gawdam train has been >15 mins late.  wahhh'}
@@ -124,32 +206,9 @@ const StationPreview = (props: StationPreviewProps) => {
                 onLikePress={()=> console.log('liked the stationpreview comment')}
               />
             </View>
-            <View style={{
-              flex: 2,
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-              justifyContent: 'space-around',
-              //backgroundColor: 'violet'
-            }}>
-              <Icon 
-                name='angle-double-up'
-                color='white'
-                type='font-awesome'
-                onPress={onClearPress}
-              />
-            </View>
           </View>
-
-          <View style={{
-            marginTop: '3%',
-            //backgroundColor: 'pink',
-            flexDirection: 'row'
-          }}>
-            
-            
         </View>
-
-      </View>
+        
     )
   } else return false;
     
@@ -195,68 +254,6 @@ export default StationPreview;
 
 /** APPENDIX
 
-<View style={{
-              flex: 13,
-              backgroundColor: 'powderblue'
-            }}>
-                            
-              <View style={{
-                marginTop: '6%'
-              }}>
-                <Text style={{
-                  color: 'white',
-                  fontSize: 14,
-                }}>
-                  Last 30 mins:
-                </Text>
-              </View>
-              <View style={{
-                marginTop: '3%'
-              }}>
-                <Text style={{
-                  color: 'white',
-                  fontSize: 14,
-                }}>
-                  12 Too Crowded
-                </Text>
-                <Text style={{
-                  color: 'white',
-                  fontSize: 14,
-                }}>
-                  5 Long Wait
-                </Text>
-              </View>
-            </View>
 
-
-<View style={{
-              flex: 11,
-              flexDirection: 'row',
-              alignItems: 'space-between',
-              justifyContent: 'flex-end',
-              //backgroundColor: 'violet'
-            }}>
-              <Icon
-                reverse={true}
-                name='meh-o'
-                type='font-awesome'
-                color='purple'
-                onPress={onLinePress}
-              />
-              <Icon
-                reverse={true}
-                name='clock-o'
-                type='font-awesome'
-                color='purple'
-                onPress={onLinePress}
-              />
-              <Icon
-                reverse={true}
-                name='comment-o'
-                type='font-awesome'
-                color='purple'
-                onPress={onFeedPress}
-              />
-            </View>
 
 **/
