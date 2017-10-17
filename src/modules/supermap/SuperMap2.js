@@ -114,6 +114,33 @@ class SuperMap extends Component {
       return stopsToDisplay;
     }
 
+    /*  Commenting out, need to figure this out.  Use other one for now
+    getStationLines(targetStation){
+      //superMapData[i][10] is the name of the station
+      //superMapData[i][11] is the string of the lat/long that needs to be regex'd
+      //superMapData[i][12] is the string of lines e.g. 'A-C-F' 
+
+      let badgesToDisplay = [];
+            for(i=0;i<superMapData.length;i++){
+              if(superMapData[i][10]==targetStation){
+                let myArr = superMapData[i][12].split('-');
+                for(k=0;k<myArr.length;k++){
+                  
+                  badgesToDisplay.push(
+                    [
+                      myArr[k],
+                      this.getBackgroundColor(myArr[k],lineList),
+                      this.getTextColor(myArr[k],lineList)
+                    ]
+                  );
+                }
+                return badgesToDisplay;
+              }
+            }
+      
+    }
+    */
+
     getStationLines(linesString){
 
       let badgesToDisplay = [];
@@ -214,7 +241,14 @@ class SuperMap extends Component {
           barStyle="light-content"
         />
         <MapView
-          style={styles.mapview}
+          style={{
+            left: 0,
+            right: 0,
+            top: 0,
+            bottom: 0,
+            position: 'absolute',
+            //flex: 18,
+          }}
           initialRegion={{
             latitude: 40.7590,      //specific point (N/E is positive, S/W is negative)
             longitude: -73.9845,    //this is Times Square i.e.
@@ -229,7 +263,6 @@ class SuperMap extends Component {
                   latitude: this.getLat(theStop[1]),
                   longitude: this.getLong(theStop[1])
                 }}
-                //image='http://riseandpineco.com/appten/meh.png'
                 pinColor={ this.getBackgroundColor(this.props.selectedLine,lineList) }
                 onPress={ this.props.previewedStation ? ()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2])) : null } //this.getStationLines(theStop[0])) : null }
               >
@@ -237,21 +270,21 @@ class SuperMap extends Component {
                   tooltip={false}
                   onPress={()=>this.props.actions.getPreview(theStop[0],this.getStationLines(theStop[2]))} //this.getStationLines(theStop[0]))}
                 >
-                  <View>
+                  <View style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                  }}>
                     <Text style={{
+                      flex: 1,
                       color: 'black'}}
                     >
                       {theStop[0]} >
                     </Text>
                     <Text style={{
+                      flex: 1,
                       color: 'gray'
                     }}>
                       {theStop[2]}
-                    </Text>
-                    <Text style={{
-                      color: 'gray'
-                    }}>
-                      Click for details
                     </Text>
                   </View>
                 </MapView.Callout>
@@ -267,28 +300,53 @@ class SuperMap extends Component {
             pinColor='black'
           />
         </MapView>
-        <View style = {styles.stationpreview}>
-          <StationPreview
-            visible={this.props.previewedStation ? true : false}
-            stationName={ this.props.previewedStation }
-            onClearPress={()=>this.clearStationPreview()}
-            lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
-            selectedLine = { this.props.selectedLine }
-            onLinePress = {()=> this.props.navigation.navigate('SettingsStack')}
-            onFeedPress = {()=> this.props.navigation.navigate('StationDetail',{
-                area: 'Queens',
-                colors: 'blue,orange,purple',
-                id: 4,
-                lines: 'E,F,7',
-                longName: 'Long Name',
-                shortName: 'Shortish Name'
-              })}
-            onCheckInPress = {() => this.toggleCheckInStatus() }
-          >
-          </StationPreview>
-        </View>
-        <View style={styles.lineandmenucontainer}>
-          <View style={styles.lineselector}>
+
+        <View style={{
+            position: 'absolute',
+            top: '0%',
+            width: '100%',
+            height: '28%',
+          }}>
+            <StationPreview
+              visible={this.props.previewedStation ? true : false}
+              stationName={ this.props.previewedStation }
+              onClearPress={()=>this.clearStationPreview()}
+              lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
+              selectedLine = { this.props.selectedLine }
+              onLinePress = {()=> this.props.navigation.navigate('SettingsStack')}
+              onFeedPress = {()=> this.props.navigation.navigate('StationDetail',{
+                  area: 'Queens',
+                  colors: 'blue,orange,purple',
+                  id: 4,
+                  lines: 'E,F,7',
+                  longName: 'Long Name',
+                  shortName: 'Shortish Name'
+                })}
+              onCheckInPress = {() => this.toggleCheckInStatus() }
+            >
+            </StationPreview>
+          </View>
+
+
+        <View style={{
+          flexDirection: 'column',
+          top: '80%'
+        }}>
+          <View style={{
+            //flex: 1,
+            alignItems: 'center',
+            backgroundColor: 'powderblue',
+          }}>
+            <LocationStatusButton
+              onIconPress={() => this.toggleCheckInStatus()}
+            />
+          </View>
+          <View style={{
+            //flex: 1,
+            backgroundColor: 'violet',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          }}>
             {
               lineList.map( (line) => (
                   <Badge
@@ -305,13 +363,16 @@ class SuperMap extends Component {
               )
             }
           </View>
+          
           <View style={styles.appheader}>
-          <AppHeader
-            onMenuPress={()=>this.props.navigation.navigate('DrawerOpen')}
-            isLocationSet={ (this.props.myLocation.lat) ? true : false }
-          />
+            <AppHeader
+              onMenuPress={()=>this.props.navigation.navigate('DrawerOpen')}
+              isLocationSet={ (this.props.myLocation.lat) ? true : false }
+            />
+          </View>
         </View>
-        </View>
+
+        
         
     </View>
     )
@@ -344,3 +405,38 @@ class SuperMap extends Component {
   )(SuperMap);
 
 /*----- APPENDIX -----*/
+
+/*
+<View style={{
+            position: 'absolute',
+            top: '0%',
+            width: '100%',
+            height: '28%',
+          }}>
+            <StationPreview
+              visible={this.props.previewedStation ? true : false}
+              stationName={ this.props.previewedStation }
+              onClearPress={()=>this.clearStationPreview()}
+              lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
+              selectedLine = { this.props.selectedLine }
+              onLinePress = {()=> this.props.navigation.navigate('SettingsStack')}
+              onFeedPress = {()=> this.props.navigation.navigate('StationDetail',{
+                  area: 'Queens',
+                  colors: 'blue,orange,purple',
+                  id: 4,
+                  lines: 'E,F,7',
+                  longName: 'Long Name',
+                  shortName: 'Shortish Name'
+                })}
+              onCheckInPress = {() => this.toggleCheckInStatus() }
+            >
+            </StationPreview>
+          </View>
+
+  <View>
+            <CheckInFlow
+              visible={this.props.checkInIsComplete ? false : true}  
+            />
+        </View>
+*/
+

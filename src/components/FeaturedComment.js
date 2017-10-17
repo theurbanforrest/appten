@@ -16,7 +16,7 @@ import {
 import HeartButton from './HeartButton';
 
 /*-- THE COMPONENT --*/
-const CommentCard = (props: CommentCardProps) => {
+const FeaturedComment = (props: FeaturedCommentProps) => {
 
   //define constants to take in as props
   //e.g. const { all, the, things } = props
@@ -40,40 +40,52 @@ const CommentCard = (props: CommentCardProps) => {
         flex: 1,
         flexDirection: 'column', 
         paddingTop: '3%', 
-        paddingBottom: '3%', 
+        //paddingBottom: '3%', 
         justifyContent: 'space-between', 
-        backgroundColor: 'black'
+        //backgroundColor: 'powderblue' //for debug
       }}>
-        <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{flex: 4}}>
+        <View style={{
+          //flex: 1, 
+          flexDirection: 'row'
+        }}>
+          <View style={{
+            flex: 4
+          }}>
             <Avatar
               medium
               rounded
               source={{uri: 'https://randomuser.me/api/portraits/women/' + likeCount + '.jpg' }}
             />
           </View>
-          <View style={{flex: 18, flexDirection: 'column'}}>
-            <View style={{flex: 4}}>
+          <View style={{
+            flex: 18, 
+            flexDirection: 'column'
+          }}>
+            <View style={{
+              //flex: 4
+            }}>
               <Text style={{fontWeight: 'bold', color: 'white'}}>
                 {title}
               </Text>
             </View>
-            <View style={{flex: 20}}>
+            <View style={{
+              //flex: 20
+            }}>
               <Text style={{color: 'white'}}>
                 {comment}
               </Text>
             </View>
           </View>
-          <View style={{flex: 2}}>
-            <Icon
-              name='angle-down'
-              type='font-awesome'
-              color='purple'
-            />
-          </View>
+          
         </View>
-        <View style={{flex: 4, flexDirection: 'row', paddingTop: '3%'}}>
-          <View style={{flex: 4}}>
+        <View style={{
+          //flex: 1,
+          flexDirection: 'row',
+          paddingTop: '3%'}}>
+          <View style={{
+            flex: 4
+          }}>
+            
           </View>
           <View style={{flex: 4}}>
             <HeartButton
@@ -98,7 +110,7 @@ const CommentCard = (props: CommentCardProps) => {
 }
 
   //Enter the default values of the props
-    CommentCard.defaultProps = {
+    FeaturedComment.defaultProps = {
       //enter the default values here
 
         //title: '',
@@ -111,7 +123,7 @@ const CommentCard = (props: CommentCardProps) => {
     };
 
   //Define the props here
-    CommentCard.propTypes = {
+    FeaturedComment.propTypes = {
       //define the types here  e.g. string, object, func, any, bool, number
       //oneOfType([array of types])
 
@@ -140,7 +152,7 @@ const CommentCard = (props: CommentCardProps) => {
           flexDirection: 'row',             //align the group top
           justifyContent: 'center',  //align the group center
           alignItems: 'center',             //align items to each other center
-          padding: '5%',
+          //padding: '5%',
           backgroundColor: 'violet'
 
         },
@@ -150,79 +162,19 @@ const CommentCard = (props: CommentCardProps) => {
     });
 
 
-export default CommentCard;
+export default FeaturedComment;
 
-  /*
+/** APPENDIX
 
-  <View style={{flex: 1, flexDirection: 'column'}}> //container
 
-          //
-            <View
-              style={{
-                flex: 10,
-                backgroundColor:'magenta'
-              }}
-            >
-            </View>
-            <View
-              style={{
-                flex: 2,
-                flexDirection: 'row',
-                backgroundColor: 'violet',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              <View style={{flex: 3}}>
-                <HeartButton
-                isSelected={isLiked}
-                likeCount={likeCount}
-                onIconPress={onLikePress}
-                style={styles.heartButton}
-                />
-              </View>
-              <View style={{flex: 21}} />
-            </View>
-        </View>
-  */
-
-  /*
-
-   <View style={{flex: 1, flexDirection: 'row', paddingTop: '3%', paddingBottom: '3%' }}> 
-          <View style={{flex: 4}}>  
-            <Avatar
-              medium
-              rounded
-              source={{uri: 'https://randomuser.me/api/portraits/women/8.jpg'}}
+<View style={{
+            //flex: 2
+          }}>
+            <Icon
+              name='angle-down'
+              type='font-awesome'
+              color='purple'
             />
           </View>
 
-          <View style={{flex: 20}}>  
-
-            <View style={{flex: 6, backgroundColor: 'powderblue'}}>
-              <Text style={{fontWeight: 'bold'}}>
-                {title}
-              </Text> 
-            </View>
-            <View style={{flex: 16, backgroundColor: 'skyblue'}}>
-              <Text>
-                {comment}
-              </Text>
-            </View>
-            <View style={{flex: 2, flexDirection: 'row', backgroundColor: 'violet'}}>
-              <View style={{flex: 4}}>
-                <HeartButton
-                  isSelected={isLiked}
-                  likeCount={likeCount}
-                  onIconPress={onLikePress}
-                  style={styles.heartButton}
-                />
-              </View>
-              <View style={{flex: 20}}>
-              </View>
-            </View>
-          </View>
-
-        </View>
-
-  */
+**/
