@@ -29,6 +29,20 @@ import { connect } from 'react-redux';
     },
   });
 
+  /*-- MapStack --*/
+
+  export const MapStack = StackNavigator({
+    TheMap: {
+      screen: SuperMap,
+      navigationOptions: {
+        header: false,
+      }
+    },
+    LineFeed: {
+      screen: StationDetail
+    },
+  });
+
   /*-- Tabs --*/
   export const Tabs = DrawerNavigator({
   SuperMap: {
@@ -60,7 +74,18 @@ import { connect } from 'react-redux';
       drawerIcon: ({ tintColor }) => <Icon name='comments-o' type='font-awesome' size={25} color={tintColor} /> ,
     }
   },
-});
+  MapStack: {
+    screen: MapStack,
+    navigationOptions: {
+      drawerLabel: 'Mappy Stacky',
+      drawerIcon: ({tintColor}) => <Icon name='anchor' type='font-awesome' size={25} color={tintColor} /> ,
+    }
+  }
+},
+{
+  headerMode: 'screen'
+}
+);
 
   /**-- SettingsStack --**/
 

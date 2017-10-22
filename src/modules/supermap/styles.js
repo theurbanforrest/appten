@@ -47,7 +47,7 @@ export const styles = StyleSheet.create({
   stationpreview: {
     position: 'absolute',
           top: '0%',
-          height: '33%',
+          height: '31%',
           right: '0%',
           width: '100%',
   },

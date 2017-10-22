@@ -3,7 +3,9 @@ import React from 'react'
 import {
   View,
   StyleSheet,
-  Text
+  Text,
+  Image,
+  TouchableHighlight,
 } from 'react-native'
 import {
   Button,
@@ -75,22 +77,33 @@ const StationPreview = (props: StationPreviewProps) => {
             //flex: 1,
             flexDirection: 'row',
             justifyContent: 'flex-start',
+            paddingRight: '5%',
           }}>
-              <View>
-                <Text style={{
-                  color: 'white',
-                  fontSize: 18,
-                }}
-                >
-                  {stationName}
-                </Text>
-              </View>
-          </View>
-          <View style={{
-                //flex: 1,
-                flexDirection: 'row',
-                paddingTop: '1%',
+            <View
+              style={{
+                flex: 1,
+            }}>
+            </View>
+              <View style={{
+                flexDirection: 'column',
               }}>
+                <View style={{
+                  flexDirection: 'row',
+                  justifyContent: 'flex-end',
+                }}>
+                  <Text style={{
+                    color: 'white',
+                    fontSize: 18,
+                  }}
+                  >
+                    {stationName}
+                  </Text>
+                </View>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'flex-end',
+                  }}>
                   {
                     lines.map( (line) => (
                         <Badge
@@ -99,56 +112,52 @@ const StationPreview = (props: StationPreviewProps) => {
                             backgroundColor: getBackgroundColor(line,lineList) //keeping static, not connected to selectedLine
                           }}
                           textStyle={{
-                            color: getTextColor(line,lineList) //keeping static, not connected to selectedLine
+                            color: getTextColor(line,lineList), //keeping static, not connected to selectedLine
+                            fontSize: 11,
                           }}
                           onPress={()=> onBadgeLineClick(line)}//console.log('this should be some action from redux')}
                         />
                       ))
                   }
+                </View>
+              </View>
           </View>
           <View style={{
             flex: 1,
             flexDirection: 'row',
-            //padding:'3%',
+            paddingTop:'3%',
             //backgroundColor: 'black'
           }}>
             <View style={{
-              flex: 22
+              flex: 20,
+              //backgroundColor: 'gray', //for debug
             }}>
               <FeaturedComment
                 title={'fochin82'}
                 imageSrc={'https://randomuser.me/api/portraits/men/18.jpg'}
                 comment={'omg this is like the second day that this gawdam train has been >15 mins late.  wahhh'}
-                isLiked={true}
-                likeCount={18}
-                onLikePress={()=> console.log('liked the stationpreview comment')}
+                isLiked={false}
+                likeCount={12}
+                onLikePress={onLinePress}
+                onCommentPress={onFeedPress}
               />
             </View>
-            <View style={{
-              flex: 2,
-              flexDirection: 'row',
-              alignItems: 'flex-end',
-              justifyContent: 'space-around',
-              //backgroundColor: 'violet'
-            }}>
-              <Icon 
-                name='angle-double-up'
-                color='white'
-                type='font-awesome'
-                onPress={onClearPress}
-              />
-            </View>
+
+              <View style={{
+                flex: 4,
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                //backgroundColor: 'violet' //for debug
+              }}>
+                  <Icon 
+                    name='angle-double-up'
+                    color='white'
+                    type='font-awesome'
+                    onPress={onClearPress}
+                  />
+              </View>
           </View>
-
-          <View style={{
-            marginTop: '3%',
-            //backgroundColor: 'pink',
-            flexDirection: 'row'
-          }}>
-            
-            
-        </View>
-
       </View>
     )
   } else return false;
