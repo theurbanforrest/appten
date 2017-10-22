@@ -3,7 +3,8 @@ import React from 'react'
 import {
   View,
   StyleSheet,
-  Text
+  Text,
+  TouchableHighlight,
 } from 'react-native'
 import {
   Avatar,
@@ -26,6 +27,9 @@ const AppHeader = (props: AppHeaderProps) => {
   //do functions
 
     return(
+        <TouchableHighlight onPress={onMenuPress} style={{
+          width: '100%',
+        }}>
         <View style={{
           //position: 'absolute',
           //top: '88%',
@@ -40,51 +44,51 @@ const AppHeader = (props: AppHeaderProps) => {
           //justifyContent: 'center',
           alignItems: 'center',
         }}>
-          <View style={{
-            flex: 3,
-            //flexDirection: 'row',
-            //justifyContent: 'space-around'
-          }}>
-            <Avatar
-              small
-              rounded
-              source={{uri: 'https://randomuser.me/api/portraits/women/29.jpg' }}
-              onPress={onMenuPress}
-            />
-          </View>
-          <View style={{
-            flex: 18
-          }}>
-            <Text
-              style={{
-                color: 'white',
-                //fontFamily: 'serif',
-                fontSize: 18
-              }}
-            >
-              fochin82
-            </Text>
-            <Text
-              style={{
-                color: 'white',
-                //fontFamily: 'serif',
-                fontSize: 14
-              }}
-            >
-              Level 3 - 23/50 - 27 pts to lvl 4
-            </Text>
-          </View>
-          <View style={{
-            flex: 3
-          }}>
-            <Icon
-              name='ellipsis-v'
-              type='font-awesome'
-              onPress={onMenuPress}
-              color='white'
-            />
-          </View>
+          
+              <View style={{
+                flex: 3,
+              }}>
+                <Avatar
+                  small
+                  rounded
+                  source={{uri: 'https://randomuser.me/api/portraits/men/49.jpg' }}
+                  //onPress={onMenuPress}
+                />
+              </View>
+              <View style={{
+                flex: 18
+              }}>
+                <Text
+                  style={{
+                    color: 'white',
+                    //fontFamily: 'serif',
+                    fontSize: 18
+                  }}
+                >
+                  fochin82
+                </Text>
+                <Text
+                  style={{
+                    color: 'white',
+                    //fontFamily: 'serif',
+                    fontSize: 14
+                  }}
+                >
+                  Level 3 - 23/50 - 27 pts to lvl 4
+                </Text>
+              </View>
+              <View style={{
+                flex: 3
+              }}>
+                <Icon
+                  name='ellipsis-v'
+                  type='font-awesome'
+                  //onPress={onMenuPress}
+                  color='white'
+                />
+              </View>
         </View>
+        </TouchableHighlight>
     );
 }
 

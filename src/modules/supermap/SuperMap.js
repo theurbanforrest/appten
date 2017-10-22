@@ -8,7 +8,8 @@
       Text,
       StyleSheet,
       TouchableHighlight,
-      StatusBar
+      StatusBar,
+      Image,
     } from 'react-native'
     import { 
       Card,
@@ -267,7 +268,9 @@ class SuperMap extends Component {
             pinColor='black'
           />
         </MapView>
+        
         <View style = {styles.stationpreview}>
+          
           <StationPreview
             visible={this.props.previewedStation ? true : false}
             stationName={ this.props.previewedStation }
@@ -311,8 +314,7 @@ class SuperMap extends Component {
             isLocationSet={ (this.props.myLocation.lat) ? true : false }
           />
         </View>
-        </View>
-        
+      </View>
     </View>
     )
   }//end render

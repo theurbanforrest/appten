@@ -27,7 +27,8 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
       comment,
       isLiked,
       likeCount,
-      onLikePress
+      onLikePress,
+      onCommentPress,
 
     } = props;
 
@@ -39,17 +40,20 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
       <View style={{
         flex: 1,
         flexDirection: 'column', 
-        paddingTop: '3%', 
+        //paddingTop: '3%', 
         //paddingBottom: '3%', 
         justifyContent: 'space-between', 
         //backgroundColor: 'powderblue' //for debug
       }}>
         <View style={{
           //flex: 1, 
-          flexDirection: 'row'
+          flexDirection: 'row',
+          justifyContent: 'space-between'
         }}>
           <View style={{
-            flex: 4
+            flex: 4,
+            paddingRight: '3%',
+            //backgroundColor: 'pink' //for debug
           }}>
             <Avatar
               medium
@@ -76,8 +80,8 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
               </Text>
             </View>
           </View>
-          
         </View>
+        
         <View style={{
           //flex: 1,
           flexDirection: 'row',
@@ -100,6 +104,7 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
               name='commenting-o'
               type='font-awesome'
               color='purple'
+              onPress={onCommentPress}
             />
           </View>
           <View style={{flex: 11}}>
@@ -113,13 +118,14 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
     FeaturedComment.defaultProps = {
       //enter the default values here
 
-        //title: '',
+        title: '',
         imageSrc: 'https://randomuser.me/api/portraits/women/32.jpg',                               
         height: 150,
         isLiked: false,
         likeCount: 0,
-        //comment not setting by default
-        //onLikePress not setting by default
+        comment: 'no comment',
+        onLikePress: console.log('did onLikePress()'),
+        onCommentPress: console.log('did onCommentPress()'),
     };
 
   //Define the props here
@@ -133,7 +139,8 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
         isLiked: PropTypes.bool,
         likeCount: PropTypes.number,
         comment: PropTypes.string,
-        onLikePress: PropTypes.func
+        onLikePress: PropTypes.func,
+        onCommentPress: PropTypes.func,
     };
 
   //Define styles
