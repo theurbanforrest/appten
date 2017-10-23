@@ -67,8 +67,7 @@ const StationPreview = (props: StationPreviewProps) => {
   if(visible){
     return(
       <View style={{
-        padding: '3%',
-        paddingTop: '10%',
+        //margin: '3%',
         backgroundColor: 'black',   //need to figure out how to render this properly
         flexDirection: 'column',
         flex: 1,
@@ -77,7 +76,9 @@ const StationPreview = (props: StationPreviewProps) => {
             //flex: 1,
             flexDirection: 'row',
             justifyContent: 'flex-start',
+            paddingTop: '8%',
             paddingRight: '5%',
+            paddingBottom: '3%',
           }}>
             <View
               style={{
@@ -126,10 +127,12 @@ const StationPreview = (props: StationPreviewProps) => {
             flex: 1,
             flexDirection: 'row',
             paddingTop:'3%',
-            //backgroundColor: 'black'
+            //backgroundColor: 'gray'
           }}>
             <View style={{
               flex: 20,
+              paddingBottom: '3%',
+              paddingLeft: '3%',
               //backgroundColor: 'gray', //for debug
             }}>
               <FeaturedComment
@@ -148,6 +151,7 @@ const StationPreview = (props: StationPreviewProps) => {
                 flexDirection: 'column',
                 alignItems: 'center',
                 justifyContent: 'flex-end',
+                paddingBottom: '3%',
                 //backgroundColor: 'violet' //for debug
               }}>
                   <Icon 

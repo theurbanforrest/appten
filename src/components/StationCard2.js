@@ -11,10 +11,7 @@ import {
 import {
   Card,
   Avatar,
-  Icon,
-  FormLabel,
-  FormInput,
-  FormValidationMessage,
+  Icon
 } from 'react-native-elements';
 
 /*-- THE COMPONENT --*/
@@ -39,16 +36,72 @@ const StationCard = (props: StationCardProps) => {
     return(
       <View style={{
         flex: 1,
-        flexDirection: 'column', 
-        paddingTop: '3%', 
-        paddingBottom: '3%', 
-        justifyContent: 'space-between', 
-        backgroundColor: 'white'
+        flexDirection: 'column',
       }}>
-        <FormLabel>Name</FormLabel>
-        <FormInput //onChangeText={()=> console.log('onChangeText() ran')}
-        />
-        <FormValidationMessage>Error message</FormValidationMessage>
+        <View style={{flex: 16, backgroundColor: 'gray'}}>
+          <Text style={{
+            color: 'orange',
+            fontSize: 48
+          }}
+          >
+            {title}
+          </Text>
+        </View>
+        <View style={{flex: 8, flexDirection: 'row'}}>
+          <View style={{
+            flex: 8,
+            flexDirection: 'column',
+            backgroundColor: 'black',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Text style={{
+              color: 'white',
+              fontSize: 24
+            }}>
+              15m ago
+            </Text>
+            <Text style={{
+              color: 'white'
+            }}>
+              Last checkin
+            </Text>
+          </View>
+          <View style={{
+            flex: 8,
+            flexDirection: 'column',
+            backgroundColor: 'black',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Icon
+              size={30}
+              name='meh-o'
+              type='font-awesome'
+              color='orange'
+            />
+            <Text style={{color: 'orange'}}>
+              Mood: Meh
+            </Text>
+          </View>
+          <View style={{
+            flex: 8,
+            flexDirection: 'column',
+            backgroundColor: 'black',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}>
+            <Icon
+              size={30}
+              name='pencil-square-o'
+              type='font-awesome'
+              color='white'
+            />
+            <Text style={{color: 'white'}}>
+              Check-In
+            </Text>
+          </View>
+        </View>
       </View>
     )
 }

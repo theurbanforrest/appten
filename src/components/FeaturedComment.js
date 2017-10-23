@@ -85,7 +85,8 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
         <View style={{
           //flex: 1,
           flexDirection: 'row',
-          paddingTop: '3%'}}>
+          //paddingTop: '3%'
+        }}>
           <View style={{
             flex: 4
           }}>

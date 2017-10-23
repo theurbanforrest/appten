@@ -278,13 +278,13 @@ class SuperMap extends Component {
             lines={ this.props.previewedStationLines }//['BB','green','white'] }//this.props.previewedStationLines }
             selectedLine = { this.props.selectedLine }
             onLinePress = {()=> this.props.navigation.navigate('SettingsStack')}
-            onFeedPress = {()=> this.props.navigation.navigate('StationDetail',{
+            onFeedPress = {()=> this.props.navigation.navigate('LineFeed',{
                 area: 'Queens',
                 colors: 'blue,orange,purple',
                 id: 4,
                 lines: 'E,F,7',
                 longName: 'Long Name',
-                shortName: 'Shortish Name'
+                shortName: 'The Feed'
               })}
             onCheckInPress = {() => this.toggleCheckInStatus() }
           >

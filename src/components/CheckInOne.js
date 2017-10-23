@@ -1,6 +1,13 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { Avatar, Icon } from 'react-native-elements'
+import { 
+  Button,
+  Avatar, 
+  Icon,
+  FormLabel,
+  FormInput,
+  FormValidationMessage 
+} from 'react-native-elements'
 
 class CheckInOne extends Component {
 
@@ -12,6 +19,7 @@ class CheckInOne extends Component {
     this.setState({modalVisible: visible});
   }
 
+
   render() {
     return (
       <View style={{
@@ -22,13 +30,8 @@ class CheckInOne extends Component {
         paddingTop: '5%',
         flex: 1,
         flexDirection: 'column',
-        backgroundColor: '#00000080',
+        backgroundColor: 'black',
       }}>   
-        <View style={{
-          flex: 12,
-          flexDirection: 'row',
-        }}>
-        </View>
         <View style={{
           flex: 12,
           flexDirection: 'column',
@@ -46,19 +49,19 @@ class CheckInOne extends Component {
             <Avatar
               large
               rounded
-              source={{uri: 'https://randomuser.me/api/portraits/women/29.jpg' }}
+              source={{uri: 'https://randomuser.me/api/portraits/men/49.jpg' }}
               //onPress={onMenuPress}
             />
             <Text style={{
               fontSize: 24,
               color: 'white'
             }}>
-              Check-In!
+              Check In
             </Text>
             <Text style={{
               color: 'white'
             }}>
-              What's good homeslice?
+              How's your commute going?
             </Text>
           </View>
           <View style={{
@@ -86,26 +89,7 @@ class CheckInOne extends Component {
                 <Text style={{
                   color: 'white'
                 }}>
-                  Just got here
-                </Text>
-              </View>
-              <View style={{
-                flex: 8,
-                flexDirection: 'column',
-                alignItems: 'center'
-              }}>
-                <Icon
-                  reverse={true}
-                  //raised={isSelected}
-                  name='train'
-                  color='purple'
-                  type='font-awesome'
-                  //onPress={onIconPress}
-                />
-                <Text style={{
-                  color: 'white'
-                }}>
-                  Announcement
+                  Okay
                 </Text>
               </View>
               <View style={{
@@ -127,6 +111,25 @@ class CheckInOne extends Component {
                   Waiting awhile
                 </Text>
               </View>
+              <View style={{
+                flex: 8,
+                flexDirection: 'column',
+                alignItems: 'center'
+              }}>
+                <Icon
+                  reverse={true}
+                  //raised={isSelected}
+                  name='users'
+                  color='purple'
+                  type='font-awesome'
+                  //onPress={onIconPress}
+                />
+                <Text style={{
+                  color: 'white'
+                }}>
+                  Too crowded
+                </Text>
+              </View>
             </View>
           </View>
           <View style={{
@@ -135,8 +138,27 @@ class CheckInOne extends Component {
             //backgroundColor: 'blue',
           }}>
             <Text>
-              Bottom tier
+              Bottom Tier
             </Text>
+          </View>
+        </View>
+        <View style={{
+          flex: 12,
+          flexDirection: 'column',
+        }}>
+          <FormLabel>Add a comment</FormLabel>
+          <FormInput //onChangeText={()=> console.log('onChangeText() ran')}
+          />
+
+          <View style={{
+            paddingTop: '3%',
+          }}>
+            <Button 
+              large
+              icon={{name: 'commenting-o', type: 'font-awesome'}}
+              backgroundColor='purple'
+              title='SUBMIT'
+            />
           </View>
         </View>
       </View>

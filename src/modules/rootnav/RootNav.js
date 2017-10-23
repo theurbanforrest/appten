@@ -39,12 +39,17 @@ import { connect } from 'react-redux';
       }
     },
     LineFeed: {
-      screen: StationDetail
+      screen: StationDetail,
+      navigationOptions: ({ navigation }) => ({
+        title: `${navigation.state.params.shortName}`
+      }),
     },
   });
 
   /*-- Tabs --*/
   export const Tabs = DrawerNavigator({
+
+  /*-- commenting out
   SuperMap: {
     screen: SuperMap,
     navigationOptions: {
@@ -74,11 +79,13 @@ import { connect } from 'react-redux';
       drawerIcon: ({ tintColor }) => <Icon name='comments-o' type='font-awesome' size={25} color={tintColor} /> ,
     }
   },
+  --*/
+
   MapStack: {
     screen: MapStack,
     navigationOptions: {
-      drawerLabel: 'Mappy Stacky',
-      drawerIcon: ({tintColor}) => <Icon name='anchor' type='font-awesome' size={25} color={tintColor} /> ,
+      drawerLabel: 'Home',
+      drawerIcon: ({tintColor}) => <Icon name='home' type='font-awesome' size={25} color={tintColor} /> ,
     }
   }
 },
@@ -92,7 +99,6 @@ import { connect } from 'react-redux';
   export const SettingsStack = StackNavigator({
     CheckInOne: {
       screen: CheckInOne,
-
     },
   },
   {
