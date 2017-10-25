@@ -11,7 +11,8 @@ import {
 import {
   Card,
   Avatar,
-  Icon
+  Icon,
+  Badge
 } from 'react-native-elements';
 import HeartButton from './HeartButton';
 
@@ -109,6 +110,18 @@ const FeaturedComment = (props: FeaturedCommentProps) => {
             />
           </View>
           <View style={{flex: 11}}>
+            <Badge
+              value='+ Check In Now'
+              containerStyle={{
+                backgroundColor: 'black',
+                borderColor: 'orange',
+                borderWidth: 1
+              }}
+              textStyle={{
+                color: 'orange'
+              }}
+              onPress={onLikePress}
+            />
           </View>
         </View>
       </View>

@@ -29,8 +29,6 @@
     import StationPreview from  '../../components/StationPreview' //'../stationpreview/StationPreview'
     import LocationStatusButton from '../../components/LocationStatusButton'
     import AppHeader from '../../components/AppHeader'
-    import CheckInThree from '../../components/CheckInThree'
-
     import CheckInFlow from '../checkinflow/CheckInFlow'
 
   //redux
@@ -67,7 +65,6 @@ class SuperMap extends Component {
       //send to redux
       this.props.actions.clearPreview();
 
-      //HACK- closes CheckInThree - need to improve in future
 
     }
 
@@ -286,7 +283,8 @@ class SuperMap extends Component {
                 longName: 'Long Name',
                 shortName: 'The Feed'
               })}
-            onCheckInPress = {() => this.toggleCheckInStatus() }
+            onCheckInPress = {() => this.toggleCheckInStatus()}
+            onDismiss = {() => this.props.navigation.navigate('SuperMap')}
           >
           </StationPreview>
         </View>
