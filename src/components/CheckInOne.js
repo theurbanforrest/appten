@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { 
+  View,
+  Text,
+  TextInput,
+} from 'react-native'
 import { 
   Button,
   Avatar, 
   Icon,
   FormLabel,
   FormInput,
-  FormValidationMessage 
 } from 'react-native-elements'
 
 class CheckInOne extends Component {
@@ -40,6 +43,12 @@ class CheckInOne extends Component {
           alignItems: 'center',
           paddingTop: '5%'
         }}>
+          <View style={{
+            flex: 4,
+            flexDirection: 'column',
+            //backgroundColor: 'blue',
+          }}>
+          </View>
           <View style={{
             flex: 12,
             flexDirection: 'column',
@@ -132,24 +141,20 @@ class CheckInOne extends Component {
               </View>
             </View>
           </View>
-          <View style={{
-            flex: 4,
-            flexDirection: 'column',
-            //backgroundColor: 'blue',
-          }}>
-            <Text>
-              Bottom Tier
-            </Text>
-          </View>
         </View>
         <View style={{
           flex: 12,
           flexDirection: 'column',
+          paddingLeft: '3%',
+          paddingRight: '3%',
         }}>
           <FormLabel>Add a comment</FormLabel>
-          <FormInput //onChangeText={()=> console.log('onChangeText() ran')}
+          <FormInput
+            containerStyle={{
+              backgroundColor: 'white',
+              height: 100
+            }}
           />
-
           <View style={{
             paddingTop: '3%',
           }}>
@@ -158,6 +163,7 @@ class CheckInOne extends Component {
               icon={{name: 'commenting-o', type: 'font-awesome'}}
               backgroundColor='purple'
               title='SUBMIT'
+              onPress={()=> this.props.navigation.navigate('SuperMap')}
             />
           </View>
         </View>
@@ -167,3 +173,16 @@ class CheckInOne extends Component {
 }
 
 export default CheckInOne;
+
+/**
+  <TextInput
+            editable={true}
+            multiline={true}
+            numberOfLines={4}
+            maxLength={140}
+            style={{
+              height: 100,
+              backgroundColor: 'white',
+            }}
+          />
+**/

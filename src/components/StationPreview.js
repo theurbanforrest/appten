@@ -29,7 +29,8 @@ const StationPreview = (props: StationPreviewProps) => {
       onClearPress,
       onLinePress,
       onFeedPress,
-      onCheckInPress
+      onCheckInPress,
+      onDismiss,
 
     } = props;
 
@@ -179,6 +180,7 @@ const StationPreview = (props: StationPreviewProps) => {
         //onLinePress: not setting func by default
         //selectedLine: not setting string by default
         //onFeedPress: not setting func by default
+        //onDismiss: not setting func by default
     };
 
   //Define the props here
@@ -194,7 +196,7 @@ const StationPreview = (props: StationPreviewProps) => {
         selectedLine: PropTypes.string,
         onFeedPress: PropTypes.func,
         onCheckInPress: PropTypes.func,
-
+        onDismiss: PropTypes.func,
     };
 
   //Define styles
